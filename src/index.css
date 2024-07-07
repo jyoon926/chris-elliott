@@ -4,7 +4,7 @@
 
 @font-face {
   font-family: "PP Neue Montreal";
-  src: url("../public/fonts/PPNeueMontreal-Medium.woff2");
+  src: url("/fonts/PPNeueMontreal-Medium.woff2");
   font-weight: normal;
 }
 
@@ -110,6 +110,20 @@ input, textarea {
 
 .button:hover {
   background: rgba(var(--foreground), 0.8);
+}
+
+.fade-in {
+  animation: 700ms fade-in;
+}
+
+@keyframes fade-in {
+  from {
+    transform: translateY(10px);
+    opacity: 0;
+  } to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 .painting-card:hover img {

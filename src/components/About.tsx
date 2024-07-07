@@ -3,7 +3,7 @@ import Footer from "./Footer"
 
 function About() {
   return (
-    <>
+    <div className="fade-in">
       <div className='px-5 mt-14'>
         <h1 className='text-8xl font-serif mt-40 mb-20 text-center'>About Chris</h1>
         <div className="flex flex-row gap-10 justify-center items-start mb-40">
@@ -19,7 +19,7 @@ function About() {
         </div>
       </div>
       <Footer />
-    </>
+    </div>
   )
 }
 

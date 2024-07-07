@@ -38,7 +38,7 @@ function Gallery() {
   }, []);
 
   return (
-    <>
+    <div className="fade-in">
       {(urlCollection && filteredPaintings.length === 0) && <Navigate replace to="/gallery" />}
       <div className='px-5 mt-14'>
         <h1 className='text-9xl font-serif mt-40 mb-16'>Gallery</h1>
@@ -78,7 +78,7 @@ function Gallery() {
         </div>
       </div>
       <Footer></Footer>
-    </>
+    </div>
   )
 }
 

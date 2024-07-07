@@ -31,7 +31,7 @@ function Home() {
   }, []);
 
   return (
-    <>
+    <div className="fade-in">
       <div className="px-5">
         <div className="pt-32 pb-20 flex flex-col items-center text-center">
           <h1 className="text-3xl font-serif">Discover the artistic world of</h1>
@@ -54,7 +54,7 @@ function Home() {
         </div>
       </div>
       <Footer></Footer>
-    </>
+    </div>
   )
 }
 

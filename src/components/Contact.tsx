@@ -3,7 +3,7 @@ import Footer from "./Footer"
 
 function Contact() {
   return (
-    <>
+    <div className="fade-in">
       <div className="w-full px-5 flex flex-col gap-5 items-start mb-40">
         <h1 className="text-9xl font-serif mt-40 mb-10">Contact us</h1>
         <p className="text-xl">Curious about the art collection, or interested in purchasing a piece? Send us a message!</p>
@@ -23,7 +23,7 @@ function Contact() {
         </form>
       </div>
       <Footer showContactLink={false}></Footer>
-    </>
+    </div>
   )
 }
 
