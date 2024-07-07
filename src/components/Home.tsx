@@ -46,7 +46,7 @@ function Home() {
               <Link to={"/gallery/" + collection.url} className="w-full">
                 <p className="font-serif text-2xl pb-1">{collection.name}s</p>
                 <div className="w-full h-[500px] overflow-hidden">
-                  <div className="w-full h-full bg-cover bg-center scale-105 grayscale hover:grayscale-0 hover:scale-110 duration-700" style={{backgroundImage: `url(${collection.photo})`}}></div>
+                  <div className="w-full h-full bg-cover bg-center scale-105 grayscale hover:grayscale-0 hover:scale-110 duration-700 bg-gray-100" style={{backgroundImage: `url(${collection.photo})`}}></div>
                 </div>
               </Link>
             ))}

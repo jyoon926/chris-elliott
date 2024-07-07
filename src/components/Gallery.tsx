@@ -58,7 +58,7 @@ function Gallery() {
             <div key={painting.id}>
               <Link to="" className="painting-card flex flex-col gap-3">
                 <div className='flex flex-col justify-center items-center text-center'>
-                  <img className='w-full duration-300' src={painting.photoS} alt="" />
+                  <img className='w-full duration-300 bg-gray-100' src={painting.photoS} alt="" />
                   <div className='text opacity-0 absolute text-background duration-400 leading-5'>
                     {painting.price && (
                       painting.purchased ? <p>${painting.price}</p> : <p><span className='line-through'>${painting.price}</span> <span className='opacity-60'>Sold</span></p>

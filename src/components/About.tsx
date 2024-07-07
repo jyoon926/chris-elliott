@@ -7,7 +7,7 @@ function About() {
       <div className='px-5 mt-14'>
         <h1 className='text-8xl font-serif mt-40 mb-20 text-center'>About Chris</h1>
         <div className="flex flex-row gap-10 justify-center items-start mb-40">
-          <img className='w-[300px]' src="images/chris-elliott.png" alt="" />
+          <img className='w-[300px] bg-gray-100' src="images/chris-elliott.png" alt="" />
           <div className='flex flex-col items-start text-lg gap-5 max-w-2xl'>
               <p>Chris Elliott (1958-2022) was born in North Carolina, the son of a Baptist preacher and his homemaker wife. The family moved frequently, and Chris grew up in West Virginia and Illinois, and graduated from the University of Illinois, Champaign-Urbana, with a BS degree in Electrical Engineering in 1981.</p>
               <p>Chris was inventive from an early age, and favorite memories included boiling bones and reconstructing the skeletons of road-killed animals, and teaching himself to weld in his family basement while his unaware family lounged above. He developed a deep interest for early computers, spending hours as a teen in the U of I computer labs exploring a new world. He was the consummate problem solver. After graduation, Chris rode his motorcycle out to San Diego to work at Linkabit. Over the years, Chris worked for GD Laser Systems, Novatrix, Nuvasive, and Volcano/Philips.</p>
