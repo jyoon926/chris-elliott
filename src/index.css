@@ -1,0 +1,121 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "PP Neue Montreal";
+  src: url("../public/fonts/PPNeueMontreal-Medium.woff2");
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: "PP Neue Montreal";
+  src: url("/fonts/PPNeueMontreal-Bold.woff2");
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: "PP Editorial New";
+  src: url("/fonts/PPEditorialNew-Ultralight.woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "PP Editorial New";
+  src: url("/fonts/PPEditorialNew-UltralightItalic.woff2");
+  font-weight: normal;
+  font-style: italic;
+}
+
+:root {
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  --background: 255, 255, 255;
+  --foreground: 0, 0, 0;
+  --font-sans: "PP Neue Montreal";
+  --font-serif: "PP Editorial New";
+}
+
+html {
+  color: rgb(var(--foreground));
+  background: rgb(var(--background));
+}
+
+* {
+  scroll-behavior: smooth;
+}
+
+.header {
+  background: linear-gradient(
+    to bottom,
+    rgba(var(--background), 1) 0%,
+    rgba(var(--background), 0.987) 5.6%,
+    rgba(var(--background), 0.951) 11.7%,
+    rgba(var(--background), 0.896) 18.2%,
+    rgba(var(--background), 0.825) 24.9%,
+    rgba(var(--background), 0.741) 31.9%,
+    rgba(var(--background), 0.648) 39.1%,
+    rgba(var(--background), 0.55) 46.4%,
+    rgba(var(--background), 0.45) 53.6%,
+    rgba(var(--background), 0.352) 60.9%,
+    rgba(var(--background), 0.259) 68.1%,
+    rgba(var(--background), 0.175) 75.1%,
+    rgba(var(--background), 0.104) 81.8%,
+    rgba(var(--background), 0.049) 88.3%,
+    rgba(var(--background), 0.013) 94.4%,
+    rgba(var(--background), 0) 100%
+  );
+}
+
+.blur {
+  backdrop-filter: blur(15px);
+  mask-image: linear-gradient(black 30%, transparent);
+}
+
+.link {
+  border-bottom-width: 1px;
+  transition-duration: 400ms;
+  line-height: 1.2;
+}
+
+.link:hover {
+  border-color: rgba(var(--foreground), 0.5);
+}
+
+input, textarea {
+  all: unset;
+  padding: 15px;
+  border-bottom-width: 2px;
+  transition-duration: .3s;
+  background: rgba(var(--foreground), 0.05);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.button {
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 10px 24px;
+  background: rgb(var(--foreground));
+  color: rgb(var(--background));
+  cursor: pointer;
+  transition: .3s;
+  backdrop-filter: blur(5px);
+}
+
+.button:hover {
+  background: rgba(var(--foreground), 0.8);
+}
+
+.painting-card:hover img {
+  filter: brightness(0.5) saturate(0);
+}
+
+.painting-card:hover .text {
+  opacity: 1;
+}
