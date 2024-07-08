@@ -80,36 +80,34 @@ html {
   border-bottom-width: 1px;
   transition-duration: 400ms;
   line-height: 1.2;
+  
+  &:hover {
+    border-color: rgba(var(--foreground), 0.5);
+  }
 }
 
-.link:hover {
-  border-color: rgba(var(--foreground), 0.5);
-}
-
-input, textarea {
-  all: unset;
-  padding: 15px;
-  border-bottom-width: 2px;
-  transition-duration: .3s;
+.big-input {
+  padding: 12px 15px;
   background: rgba(var(--foreground), 0.05);
-  width: 100%;
   box-sizing: border-box;
+  border-radius: 0.25rem;
 }
 
 .button {
   border: none;
   cursor: pointer;
   font-size: 1rem;
-  padding: 10px 24px;
+  padding: 8px 20px;
   background: rgb(var(--foreground));
   color: rgb(var(--background));
   cursor: pointer;
   transition: .3s;
   backdrop-filter: blur(5px);
-}
-
-.button:hover {
-  background: rgba(var(--foreground), 0.8);
+  border-radius: 0.25rem;
+  
+  &:hover {
+    background: rgba(var(--foreground), 0.8);
+  }
 }
 
 .fade-in {

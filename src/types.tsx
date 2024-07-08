@@ -19,3 +19,12 @@ export interface Collection {
   url: string;
   photo: string;
 }
+
+export const Collections = [
+  "Landscape",
+  "Abstract",
+  "Portrait",
+  "Still Life",
+  "Animal",
+  "Interior"
+]

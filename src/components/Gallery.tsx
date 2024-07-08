@@ -43,11 +43,11 @@ function Gallery() {
       <div className='px-5 mt-14'>
         <h1 className='text-9xl font-serif mt-40 mb-16'>Gallery</h1>
         <div className='flex flex-row border-b pb-3 gap-3'>
-          <Link to="/gallery" className={`border py-1.5 px-3.5 duration-300 ${
+          <Link to="/gallery" className={`border py-1.5 px-3.5 duration-300 rounded ${
                 urlCollection ? 'hover:bg-foreground/10' : 'bg-foreground text-background'
               }`}>All Paintings</Link>
           {collections.map(collection => (
-            <Link key={collection.url} to={'/gallery/' + collection.url} className={`border py-1.5 px-3.5 duration-300 ${
+            <Link key={collection.url} to={'/gallery/' + collection.url} className={`border py-1.5 px-3.5 duration-300 rounded ${
                   urlCollection === collection.url ? 'bg-foreground text-background' : 'hover:bg-foreground/10'
                 }`}>{collection.name}s
             </Link>
@@ -58,7 +58,7 @@ function Gallery() {
             <div key={painting.id}>
               <Link to="" className="painting-card flex flex-col gap-3">
                 <div className='flex flex-col justify-center items-center text-center'>
-                  <img className='w-full duration-300 bg-gray-100' src={painting.photoS} alt="" />
+                  <img className='w-full duration-300 bg-gray-100 rounded' src={painting.photoS} alt="" />
                   <div className='text opacity-0 absolute text-background duration-400 leading-5'>
                     {painting.price && (
                       painting.purchased ? <p>${painting.price}</p> : <p><span className='line-through'>${painting.price}</span> <span className='opacity-60'>Sold</span></p>
