@@ -122,6 +122,24 @@ html {
   }
 }
 
+.spinner {
+  animation: spin 1s linear infinite;
+  height: 16px;
+  width: 16px;
+  border: 2px solid rgba(var(--background), 0.5);
+  border-bottom: 2px solid transparent;
+  border-left: 2px solid transparent;
+  border-radius: 100%;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0);
+  } to {
+    transform: rotate(360deg);
+  }
+}
+
 .painting-card:hover img {
   filter: brightness(0.5) saturate(0);
 }

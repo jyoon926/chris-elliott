@@ -20,6 +20,8 @@ const UploadPaintingForm: React.FC<UploadPaintingFormProps> = ({ onClose, refres
   const [purchased, setPurchased] = useState<boolean>(false);
   const [file, setFile] = useState<File | null>(null);
 
+  const [uploading, setUploading] = useState<boolean>(false);
+
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
       setFile(e.target.files[0]);
@@ -28,6 +30,7 @@ const UploadPaintingForm: React.FC<UploadPaintingFormProps> = ({ onClose, refres
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setUploading(true);
     if (file) {
       const photoLFile = new File([await compress(file, 0.9, 2000) as Blob], "L-" + file.name, { type: file.type });
       const photoMFile = new File([await compress(file, 0.8, 1000) as Blob], "M-" + file.name, { type: file.type });
@@ -53,6 +56,7 @@ const UploadPaintingForm: React.FC<UploadPaintingFormProps> = ({ onClose, refres
         console.error('Error uploading painting:', error);
       } else {
         refreshPaintings();
+        setUploading(false);
         onClose();
       }
     }
@@ -117,7 +121,12 @@ const UploadPaintingForm: React.FC<UploadPaintingFormProps> = ({ onClose, refres
         <input type="checkbox" checked={purchased} onChange={(e) => setPurchased(e.target.checked)} />
       </div>
       <div className="text-right">
-        <button type="submit" className="button">Upload</button>
+        <button type="submit" className="button">
+          {uploading 
+            ? <div className="spinner my-1"></div>
+            : <span>Upload</span>
+          }
+        </button>
       </div>
     </form>
   );

@@ -92,7 +92,7 @@ function Admin() {
                   <td><input className="w-28" type="text" value={painting.year} onChange={(e) => handleChange(painting.id, 'year', e.target.value)} /></td>
                   <td><input className="w-20" type="number" value={painting.price} onChange={(e) => handleChange(painting.id, 'price', e.target.value)} /></td>
                   <td><input type="checkbox" checked={painting.purchased} onChange={(e) => handleChange(painting.id, 'purchased', e.target.checked)} /></td>
-                  <td>
+                  <td className="flex flex-row">
                     <button className="icon save" onClick={() => updatePainting(painting)}><MdSave /></button>
                     <button className="icon delete" onClick={() => deletePainting(painting.id)}><MdDelete /></button>
                   </td>
