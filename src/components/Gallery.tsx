@@ -159,7 +159,7 @@ function Gallery() {
       {/* Slideshow */}
       <div
         className={
-          'fixed h-screen inset-0 z-50 bg-white bg-opacity-75 backdrop-blur flex flex-col md:justify-center items-center gap-10 duration-500 ' +
+          'fixed inset-0 z-50 bg-white bg-opacity-75 backdrop-blur flex flex-col md:justify-center items-center gap-10 duration-500 ' +
           (selected === undefined && 'opacity-0 pointer-events-none')
         }
       >
