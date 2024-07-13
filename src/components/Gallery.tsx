@@ -77,7 +77,7 @@ function Gallery() {
 
   const handleClose = () => {
     setSelected(undefined);
-    navigate(`/gallery/${urlCollection}`);
+    navigate(`/gallery/${urlCollection}/`);
   };
 
   return (
