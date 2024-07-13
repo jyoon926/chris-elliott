@@ -169,7 +169,7 @@ function Gallery() {
         {selected !== undefined && (
           <>
             <div className='w-full flex flex-col justify-center items-center gap-10 md:gap-0'>
-              <div className='w-full px-3 pt-14 md:py-20 flex flex-col md:flex-row gap-5 md:gap-8 justify-center items-center'>
+              <div className='w-full px-3 pt-12 md:py-20 flex flex-col md:flex-row gap-5 md:gap-8 justify-center items-center'>
                 <div className='w-full md:w-1/5'>
                   <p className='opacity-50 mb-2'>
                     {filteredPaintings[selected].collection}
