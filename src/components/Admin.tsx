@@ -1,10 +1,9 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '../supabase';
 import { Painting, Collections, Collection } from '../types';
-import { MdSave, MdDelete } from 'react-icons/md';
+import { MdSave, MdDelete, MdOutlineAddBox } from 'react-icons/md';
 import Modal from './Modal';
 import UploadPaintingForm from './Upload';
-import { MdOutlineAddBox } from "react-icons/md";
 
 function Admin() {
   const [paintings, setPaintings] = useState<Painting[]>([]);

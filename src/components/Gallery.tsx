@@ -159,61 +159,65 @@ function Gallery() {
       {/* Slideshow */}
       <div
         className={
-          'fixed inset-0 z-50 bg-white bg-opacity-75 backdrop-blur flex flex-col justify-center items-center gap-10 duration-500 ' +
+          'fixed inset-0 z-50 bg-white bg-opacity-75 backdrop-blur flex flex-col md:justify-center items-center gap-10 duration-500 ' +
           (selected === undefined && 'opacity-0 pointer-events-none')
         }
       >
         {selected !== undefined && (
           <>
-            <div className='w-full h-full py-20 flex flex-row gap-10 justify-center items-center'>
-              <button
-                className='fixed left-10 text-2xl cursor-pointer'
-                onClick={() => handlePaintingClick(selected - 1, filteredPaintings[selected - 1])}
-                disabled={selected === 0}
-              >
-                <AiOutlineArrowLeft />
-              </button>
-              <div className='w-1/5'>
-                <p className='opacity-50 mb-2'>
-                  {filteredPaintings[selected].collection}
-                  {filteredPaintings[selected].year && (
-                    <span> — {filteredPaintings[selected].year}</span>
-                  )}
-                </p>
-                <p className='font-serif text-3xl mb-5'>{filteredPaintings[selected].title}</p>
-                {filteredPaintings[selected].price && (
-                  filteredPaintings[selected].purchased ? (
-                    <p>${filteredPaintings[selected].price}</p>
-                  ) : (
-                    <p>
-                      <span className='line-through'>${filteredPaintings[selected].price}</span>{' '}
-                      <span className='opacity-60'>Sold</span>
-                    </p>
-                  )
-                )}
-                <p>{filteredPaintings[selected].medium}</p>
-                <p>{filteredPaintings[selected].location}</p>
-                {filteredPaintings[selected].width && filteredPaintings[selected].height && (
-                  <p>
-                    {filteredPaintings[selected].width} x {filteredPaintings[selected].height} in.
+            <div className='w-full flex flex-col justify-center items-center gap-10 md:gap-0'>
+              <div className='w-full px-3 pt-14 md:py-20 flex flex-col md:flex-row gap-5 md:gap-8 justify-center items-center'>
+                <div className='w-full md:w-1/5'>
+                  <p className='opacity-50 mb-2'>
+                    {filteredPaintings[selected].collection}
+                    {filteredPaintings[selected].year && (
+                      <span> — {filteredPaintings[selected].year}</span>
+                    )}
                   </p>
-                )}
+                  <p className='font-serif text-3xl mb-5'>{filteredPaintings[selected].title}</p>
+                  {filteredPaintings[selected].price && (
+                    filteredPaintings[selected].purchased ? (
+                      <p>${filteredPaintings[selected].price}</p>
+                    ) : (
+                      <p>
+                        <span className='line-through'>${filteredPaintings[selected].price}</span>{' '}
+                        <span className='opacity-60'>Sold</span>
+                      </p>
+                    )
+                  )}
+                  <p>{filteredPaintings[selected].medium}</p>
+                  <p>{filteredPaintings[selected].location}</p>
+                  {filteredPaintings[selected].width && filteredPaintings[selected].height && (
+                    <p>
+                      {filteredPaintings[selected].width} x {filteredPaintings[selected].height} in.
+                    </p>
+                  )}
+                </div>
+                <div className='w-full md:w-1/2 flex md:justify-center items-center'>
+                  <img
+                    className='max-w-full painting-main-mobile md:painting-main shadow-md'
+                    key={filteredPaintings[selected].id}
+                    src={filteredPaintings[selected].photoM}
+                    alt=''
+                  />
+                </div>
               </div>
-              <div className='w-1/2 flex justify-center items-center'>
-                <img
-                  className='max-w-full painting-main shadow-md'
-                  key={filteredPaintings[selected].id}
-                  src={filteredPaintings[selected].photoM}
-                  alt=''
-                />
+              <div className="w-full fixed bottom-3 md:bottom-auto flex justify-between items-center px-3 md:px-5">
+                <button
+                  className='text-2xl cursor-pointer'
+                  onClick={() => handlePaintingClick(selected - 1, filteredPaintings[selected - 1])}
+                  disabled={selected === 0}
+                >
+                  <AiOutlineArrowLeft />
+                </button>
+                <button
+                  className='text-2xl cursor-pointer'
+                  onClick={() => handlePaintingClick(selected + 1, filteredPaintings[selected + 1])}
+                  disabled={selected === filteredPaintings.length - 1}
+                >
+                  <AiOutlineArrowRight />
+                </button>
               </div>
-              <button
-                className='fixed right-10 text-2xl cursor-pointer'
-                onClick={() => handlePaintingClick(selected + 1, filteredPaintings[selected + 1])}
-                disabled={selected === filteredPaintings.length - 1}
-              >
-                <AiOutlineArrowRight />
-              </button>
             </div>
             <button className='link fixed top-5 right-5' onClick={handleClose}>
               Close
