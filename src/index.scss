@@ -156,10 +156,12 @@ button:disabled {
   cursor: default;
 }
 
-.painting-main-mobile {
+.painting-main {
   max-height: calc(100vh - 330px);
 }
 
-.painting-main {
-  max-height: calc(100vh - 100px);
+@media (min-width: 768px ) {
+  .painting-main {
+    max-height: calc(100vh - 100px);
+  }
 }

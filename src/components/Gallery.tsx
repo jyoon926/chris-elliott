@@ -195,7 +195,7 @@ function Gallery() {
                 </div>
                 <div className='w-full md:w-1/2 flex md:justify-center items-center'>
                   <img
-                    className='max-w-full painting-main-mobile md:painting-main shadow-md'
+                    className='max-w-full painting-main shadow-md'
                     key={filteredPaintings[selected].id}
                     src={filteredPaintings[selected].photoM}
                     alt=''
