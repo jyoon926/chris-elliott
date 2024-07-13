@@ -37,7 +37,7 @@ function Home() {
           <h1 className="text-2xl sm:text-3xl font-serif">Discover the artistic world of</h1>
           <h1 className="text-6xl sm:text-8xl sm:text-9xl font-serif italic mt-4">Chris Elliott.</h1>
           <p className="max-w-xl mt-5">With a collection of over 300 stunning paintings and thousands of sketches, Chris Elliott"s work captures the beauty of everyday life, the vibrant essence of urban landscapes, and the timeless elegance of still lifes and portraits.</p>
-          <Link to="/gallery" className="link mt-10">View the gallery →</Link>
+          <Link to="/gallery/all" className="link mt-10">View the gallery →</Link>
         </div>
         <div className="w-full">
           <p className="border-b">Collections ↓</p>

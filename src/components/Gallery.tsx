@@ -80,6 +80,9 @@ function Gallery() {
     navigate(`/gallery/${urlCollection}/`);
   };
 
+  if (filteredPaintings.length === 0)
+    return (<></>);
+
   return (
     <div className='fade-in'>
       {paintings.length && filteredPaintings.length === 0 && (
