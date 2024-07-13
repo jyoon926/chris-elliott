@@ -22,7 +22,7 @@ function Footer({showContactLink = true}) {
           <p>© 2024 Copyright</p>
           <button onClick={scrollToTop}>Back to top ↑</button>
         </div>
-        <p className="font-serif h-[15vw] leading-[1.25] text-nowrap tracking-[-.5vw] opacity-10" style={{fontSize: 'calc(23vw - 10px)'}}>Chris Elliott</p>
+        <p className="font-serif mt-3 h-[16vw] leading-[1.25] text-nowrap tracking-[-.5vw] opacity-10" style={{fontSize: 'calc(23vw - 10px)'}}>Chris Elliott</p>
       </div>
     </div>
   )
