@@ -65,7 +65,8 @@ const UploadPaintingForm: React.FC<UploadPaintingFormProps> = ({ onClose, refres
         const { data: dataS, error: uploadErrorS } = await supabase.storage.from('paintings').upload(photoSFile.name, photoSFile);
   
         if (uploadErrorL || uploadErrorM || uploadErrorS) {
-          console.error('Error uploading file');
+          setError('This painting already exists.');
+          setUploading(false);
           return;
         }
   
@@ -78,6 +79,9 @@ const UploadPaintingForm: React.FC<UploadPaintingFormProps> = ({ onClose, refres
           .insert([{ title, collection, medium, width, height, year, location, price, purchased, photoS, photoM, photoL }]);
         if (error) {
           console.error('Error uploading painting:', error);
+          setError(error.message);
+          setUploading(false);
+          return;
         } else {
           refreshPaintings();
           setUploading(false);
@@ -85,7 +89,6 @@ const UploadPaintingForm: React.FC<UploadPaintingFormProps> = ({ onClose, refres
         }
       }
     } catch (e: any) {
-      console.log(e);
       setError(e.message);
       setUploading(false);
     }
@@ -150,7 +153,7 @@ const UploadPaintingForm: React.FC<UploadPaintingFormProps> = ({ onClose, refres
         <input type="checkbox" checked={purchased} onChange={(e) => setPurchased(e.target.checked)} />
       </div>
       <div className="flex flex-row justify-end items-center gap-5">
-        <p className='text-red-500 text-xs'>{error}</p>
+        <p className='text-red-500 text-sm'>{error}</p>
         <button type="submit" className="button">
           {uploading 
             ? <div className="spinner my-1"></div>
