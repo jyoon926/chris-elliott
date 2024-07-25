@@ -15,6 +15,7 @@ function Home() {
       if (error) {
         console.error("Error fetching data:", error);
       } else {
+        data.sort((a, b) => a.order - b.order);
         const uniqueCollections = Array.from(
           new Set(data.map((painting) => painting.collection))
         );
@@ -25,10 +26,10 @@ function Home() {
           return {
             name: collectionName,
             url: collectionName.toLowerCase().replace(/\s+/g, "-") + "s",
-            photo: collectionPaintings[0]?.photoM || "",
+            photo: collectionPaintings[0].photoM || "",
           };
         });
-
+        collectionsArray.sort((a, b) => a.name.localeCompare(b.name));
         setCollections(collectionsArray);
       }
     };
@@ -59,7 +60,7 @@ function Home() {
         <div className="w-full">
           <p className="border-b">Collections ↓</p>
           <div className="flex flex-col lg:flex-row gap-5 py-5">
-            {collections?.map((collection) => (
+            {collections.map((collection) => (
               <Link
                 className="w-full"
                 to={"/gallery/" + collection.url}
@@ -67,10 +68,12 @@ function Home() {
               >
                 <p className="font-serif text-2xl pb-1">{collection.name}s</p>
                 <div className="w-full h-60 lg:h-[500px] overflow-hidden">
-                  <div
-                    className="w-full h-full bg-cover bg-center scale-105 grayscale hover:grayscale-0 hover:scale-110 duration-700 bg-gray-100"
-                    style={{ backgroundImage: `url(${collection.photo})` }}
-                  ></div>
+                  {collection.photo && (
+                    <div
+                      className="w-full h-full bg-cover bg-center scale-105 grayscale hover:grayscale-0 hover:scale-110 duration-700 bg-gray-100"
+                      style={{ backgroundImage: `url("${collection.photo}")` }}
+                    ></div>
+                  )}
                 </div>
               </Link>
             ))}
