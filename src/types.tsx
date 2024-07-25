@@ -12,6 +12,7 @@ export interface Painting {
   year?: string;
   price?: number;
   location?: string;
+  order: number;
 }
 
 export interface Collection {
@@ -26,5 +27,5 @@ export const Collections = [
   "Portrait",
   "Still Life",
   "Animal",
-  "Interior"
-]
+  "Interior",
+];

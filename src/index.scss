@@ -43,10 +43,7 @@
 html {
   color: rgb(var(--foreground));
   background: rgb(var(--background));
-}
-
-* {
-  scroll-behavior: smooth;
+  font-size: 14px;
 }
 
 .header {
@@ -80,7 +77,7 @@ html {
   border-bottom-width: 1px;
   transition-duration: 400ms;
   line-height: 1.2;
-  
+
   &:hover {
     border-color: rgba(var(--foreground), 0.5);
   }
@@ -101,10 +98,10 @@ html {
   background: rgb(var(--foreground));
   color: rgb(var(--background));
   cursor: pointer;
-  transition: .3s;
+  transition: 0.3s;
   backdrop-filter: blur(5px);
   border-radius: 0.25rem;
-  
+
   &:hover {
     background: rgba(var(--foreground), 0.8);
   }
@@ -117,7 +114,8 @@ html {
 @keyframes fade-in {
   from {
     opacity: 0;
-  } to {
+  }
+  to {
     opacity: 1;
   }
 }
@@ -134,7 +132,8 @@ html {
 @keyframes spin {
   from {
     transform: rotate(0);
-  } to {
+  }
+  to {
     transform: rotate(360deg);
   }
 }
@@ -148,7 +147,7 @@ html {
 }
 
 .backdrop-blur {
-  backdrop-filter: blur(1rem);
+  backdrop-filter: blur(2rem);
 }
 
 button:disabled {
@@ -160,7 +159,7 @@ button:disabled {
   max-height: calc(100vh - 370px);
 }
 
-@media (min-width: 768px ) {
+@media (min-width: 768px) {
   .painting-main {
     max-height: calc(100vh - 100px);
   }
