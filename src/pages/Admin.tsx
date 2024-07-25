@@ -24,6 +24,7 @@ function Admin() {
   const [selectedCollection, setCollection] = useState<
     Collection | undefined
   >();
+  const [selectedPaintings, setSelectedPaintings] = useState<number[]>([]);
 
   const filteredPaintings = selectedCollection
     ? paintings.filter(
@@ -104,14 +105,32 @@ function Admin() {
     );
   };
 
+  const togglePaintingSelection = (id: number) => {
+    setSelectedPaintings((prevSelected) =>
+      prevSelected.includes(id)
+        ? prevSelected.filter((paintingId) => paintingId !== id)
+        : [...prevSelected, id]
+    );
+  };
+
   const onDragEnd = async (result: DropResult): Promise<void> => {
     if (!result.destination) {
       return;
     }
 
-    const items = Array.from(filteredPaintings);
-    const [reorderedItem] = items.splice(result.source.index, 1);
-    items.splice(result.destination.index, 0, reorderedItem);
+    let items = Array.from(filteredPaintings);
+    const selectedIds = new Set(selectedPaintings);
+
+    let movingItems: Painting[];
+    if (selectedIds.has(Number(result.draggableId))) {
+      movingItems = items.filter((item) => selectedIds.has(item.id));
+      items = items.filter((item) => !selectedIds.has(item.id));
+    } else {
+      movingItems = [items[result.source.index]];
+      items.splice(result.source.index, 1);
+    }
+
+    items.splice(result.destination.index, 0, ...movingItems);
 
     // Update the order of the items
     const updatedItems = items.map((item, index) => ({
@@ -189,13 +208,22 @@ function Admin() {
                         draggableId={painting.id.toString()}
                         index={index}
                       >
-                        {(provided) => (
+                        {(provided, snapshot) => (
                           <tr
                             ref={provided.innerRef}
                             {...provided.draggableProps}
-                            className="bg-background"
+                            className={`${
+                              !snapshot.isDragging &&
+                              selectedPaintings.includes(painting.id) &&
+                              "bg-blue-100"
+                            } ${snapshot.isDragging && "bg-green-100"}`}
                           >
-                            <td {...provided.dragHandleProps}>
+                            <td
+                              {...provided.dragHandleProps}
+                              onClick={() =>
+                                togglePaintingSelection(painting.id)
+                              }
+                            >
                               <MdDragIndicator className="text-xl cursor-move opacity-60" />
                             </td>
                             <td>
