@@ -42,34 +42,32 @@ function Gallery() {
       if (error) {
         console.error("Error fetching data:", error);
       } else {
+        data.sort((a, b) => a.order - b.order);
         let uniqueCollections = Array.from(
           new Set(data.map((painting) => painting.collection))
         );
-        let collectionsArray: Collection[] = [
+        let collectionsArr: Collection[] = [
           {
             name: "All Paintings",
             url: "all",
             photo: "",
           },
         ];
-        collectionsArray = collectionsArray.concat(
-          uniqueCollections
-            .map((collectionName) => {
-              const collectionPaintings = data.filter(
-                (painting) => painting.collection === collectionName
-              );
-              return {
-                name: collectionName,
-                url: stringToUrl(collectionName),
-                photo: collectionPaintings[0]?.photoS || "",
-              };
-            })
-            .sort((a, b) => a.name.localeCompare(b.name))
+        collectionsArr = collectionsArr.concat(
+          uniqueCollections.map((collectionName) => {
+            const collectionPaintings = data.filter(
+              (painting) => painting.collection === collectionName
+            );
+            return {
+              name: collectionName,
+              url: stringToUrl(collectionName),
+              photo: collectionPaintings[0]?.photoS || "",
+            };
+          })
         );
-        let paintingsArr = data.sort((a, b) => a.order - b.order);
-        setPaintings(paintingsArr);
-        setCollections(collectionsArray);
-        preloadImages(paintingsArr.map((painting) => painting.photoM));
+        setPaintings(data);
+        setCollections(collectionsArr);
+        preloadImages(data.map((painting) => painting.photoM));
       }
     };
 

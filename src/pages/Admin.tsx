@@ -39,10 +39,11 @@ function Admin() {
     if (error) {
       console.error("Error fetching data:", error);
     } else {
+      data.sort((a, b) => a.order - b.order);
       const uniqueCollections = Array.from(
         new Set(data.map((painting: Painting) => painting.collection))
       );
-      let collectionsArray: Collection[] = uniqueCollections.map(
+      let collectionsArr: Collection[] = uniqueCollections.map(
         (collectionName: string) => {
           const collectionPaintings = data.filter(
             (painting: Painting) => painting.collection === collectionName
@@ -54,10 +55,8 @@ function Admin() {
           };
         }
       );
-      setPaintings(data.sort((a, b) => a.order - b.order));
-      setCollections(
-        collectionsArray.sort((a, b) => a.name.localeCompare(b.name))
-      );
+      setPaintings(data);
+      setCollections(collectionsArr);
     }
   };
 

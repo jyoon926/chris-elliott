@@ -19,7 +19,7 @@ function Home() {
         const uniqueCollections = Array.from(
           new Set(data.map((painting) => painting.collection))
         );
-        const collectionsArray = uniqueCollections.map((collectionName) => {
+        const collectionsArr = uniqueCollections.map((collectionName) => {
           const collectionPaintings = data.filter(
             (painting) => painting.collection === collectionName
           );
@@ -29,8 +29,7 @@ function Home() {
             photo: collectionPaintings[0].photoM || "",
           };
         });
-        collectionsArray.sort((a, b) => a.name.localeCompare(b.name));
-        setCollections(collectionsArray);
+        setCollections(collectionsArr);
       }
     };
 
