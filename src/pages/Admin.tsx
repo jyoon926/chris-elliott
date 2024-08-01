@@ -29,7 +29,7 @@ function Admin() {
   const filteredPaintings = selectedCollection
     ? paintings.filter(
         (painting) =>
-          painting.collection.toLowerCase().replace(/\s+/g, "-") + "s" ===
+          painting.collection.toLowerCase().replace(/\s+/g, "-") ===
           selectedCollection.url
       )
     : paintings;
@@ -49,7 +49,7 @@ function Admin() {
           );
           return {
             name: collectionName,
-            url: collectionName.toLowerCase().replace(/\s+/g, "-") + "s",
+            url: collectionName.toLowerCase().replace(/\s+/g, "-"),
             photo: collectionPaintings[0]?.photoS || "",
           };
         }
@@ -197,7 +197,8 @@ function Admin() {
                       <th>Height</th>
                       <th>Year</th>
                       <th>Price</th>
-                      <th className="purchased">Purchased</th>
+                      <th className="checked">Display Price</th>
+                      <th className="checked">Purchased</th>
                       <th></th>
                     </tr>
                   </thead>
@@ -235,7 +236,7 @@ function Admin() {
                             </td>
                             <td>
                               <input
-                                className="w-80"
+                                className="w-80 font-bold"
                                 type="text"
                                 value={painting.title}
                                 onChange={(e) =>
@@ -330,6 +331,19 @@ function Admin() {
                                     painting.id,
                                     "price",
                                     e.target.value
+                                  )
+                                }
+                              />
+                            </td>
+                            <td>
+                              <input
+                                type="checkbox"
+                                checked={painting.display_price}
+                                onChange={(e) =>
+                                  handleChange(
+                                    painting.id,
+                                    "display_price",
+                                    e.target.checked
                                   )
                                 }
                               />

@@ -25,7 +25,7 @@ function Home() {
           );
           return {
             name: collectionName,
-            url: collectionName.toLowerCase().replace(/\s+/g, "-") + "s",
+            url: collectionName.toLowerCase().replace(/\s+/g, "-"),
             photo: collectionPaintings[0].photoM || "",
           };
         });
@@ -66,7 +66,7 @@ function Home() {
                 to={"/gallery/" + collection.url}
                 key={collection.name}
               >
-                <p className="font-serif text-2xl pb-1">{collection.name}s</p>
+                <p className="font-serif text-2xl pb-1">{collection.name}</p>
                 <div className="w-full h-60 lg:h-[500px] overflow-hidden">
                   {collection.photo && (
                     <div

@@ -13,6 +13,7 @@ export interface Painting {
   price?: number;
   location?: string;
   order: number;
+  display_price?: boolean;
 }
 
 export interface Collection {
@@ -22,10 +23,11 @@ export interface Collection {
 }
 
 export const Collections = [
-  "Landscape",
-  "Abstract",
-  "Portrait",
-  "Still Life",
-  "Animal",
-  "Interior",
+  "Landscapes",
+  "Abstracts",
+  "Portraits",
+  "Still Lifes",
+  "Animals",
+  "Interiors",
+  "Unfinished",
 ];

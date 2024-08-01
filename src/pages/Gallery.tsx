@@ -32,7 +32,7 @@ function Gallery() {
   const filteredPaintings =
     urlCollection !== "all"
       ? paintings.filter(
-          (painting) => stringToUrl(painting.collection) + "s" === urlCollection
+          (painting) => stringToUrl(painting.collection) === urlCollection
         )
       : paintings;
 
@@ -59,8 +59,8 @@ function Gallery() {
                 (painting) => painting.collection === collectionName
               );
               return {
-                name: collectionName + "s",
-                url: stringToUrl(collectionName) + "s",
+                name: collectionName,
+                url: stringToUrl(collectionName),
                 photo: collectionPaintings[0]?.photoS || "",
               };
             })
@@ -162,6 +162,7 @@ function Gallery() {
                   />
                   <div className="text opacity-0 absolute text-background duration-400 leading-5">
                     {painting.price &&
+                      painting.display_price &&
                       (painting.purchased ? (
                         <p>${painting.price}</p>
                       ) : (
@@ -211,6 +212,7 @@ function Gallery() {
                     {filteredPaintings[selected].title}
                   </p>
                   {filteredPaintings[selected].price &&
+                    filteredPaintings[selected].display_price &&
                     (filteredPaintings[selected].purchased ? (
                       <p>${filteredPaintings[selected].price}</p>
                     ) : (

@@ -33,7 +33,7 @@ const CollectionList: React.FC<CollectionListProps> = ({
               : "hover:bg-light"
           }`}
         >
-          {collection.name}s
+          {collection.name}
         </p>
       ))}
     </div>
