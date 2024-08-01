@@ -189,16 +189,16 @@ function Admin() {
                   <thead>
                     <tr className="border-b">
                       <th></th>
-                      <th>Image</th>
+                      <th className="shift">Image</th>
                       <th>Title</th>
-                      <th>Collection</th>
+                      <th className="shift">Collection</th>
                       <th>Medium</th>
                       <th>Width</th>
                       <th>Height</th>
                       <th>Year</th>
                       <th>Price</th>
-                      <th className="checked">Display Price</th>
-                      <th className="checked">Purchased</th>
+                      <th className="shift">Display Price</th>
+                      <th className="shift">Purchased</th>
                       <th></th>
                     </tr>
                   </thead>
