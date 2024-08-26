@@ -1,5 +1,5 @@
 import Footer from "../components/Footer";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { supabase } from "../supabase";
 import { Collection, Painting } from "../types";
 import { useParams, useNavigate } from "react-router";
@@ -106,6 +106,42 @@ function Gallery() {
     navigate(`/gallery/${urlCollection}/`);
   };
 
+  const handleKeyDown = useCallback(
+    (event: KeyboardEvent) => {
+      if (selected !== undefined) {
+        switch (event.key) {
+          case "ArrowLeft":
+            if (selected > 0) {
+              handlePaintingClick(
+                selected - 1,
+                filteredPaintings[selected - 1]
+              );
+            }
+            break;
+          case "ArrowRight":
+            if (selected < filteredPaintings.length - 1) {
+              handlePaintingClick(
+                selected + 1,
+                filteredPaintings[selected + 1]
+              );
+            }
+            break;
+          case "Escape":
+            handleClose();
+            break;
+        }
+      }
+    },
+    [selected, filteredPaintings]
+  );
+
+  useEffect(() => {
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [handleKeyDown]);
+
   if (filteredPaintings.length === 0) return <></>;
 
   return (
@@ -173,7 +209,7 @@ function Gallery() {
                       ))}
                     <p>{painting.collection}</p>
                     <p>{painting.location}</p>
-                    <p>{painting.medium}</p>
+                    <p className="capitalize">{painting.medium}</p>
                     {painting.width && painting.height && (
                       <p>
                         {painting.width} x {painting.height} in.
@@ -181,7 +217,9 @@ function Gallery() {
                     )}
                   </div>
                 </div>
-                <p className="font-serif text-xl">{painting.title}</p>
+                <p className="font-serif text-xl capitalize">
+                  {painting.title}
+                </p>
               </Link>
             </div>
           ))}
@@ -206,7 +244,7 @@ function Gallery() {
                       <span> — {filteredPaintings[selected].year}</span>
                     )}
                   </p>
-                  <p className="font-serif text-3xl mb-5">
+                  <p className="font-serif text-3xl mb-5 capitalize">
                     {filteredPaintings[selected].title}
                   </p>
                   {filteredPaintings[selected].price &&
@@ -221,7 +259,9 @@ function Gallery() {
                         <span className="opacity-60">Sold</span>
                       </p>
                     ))}
-                  <p>{filteredPaintings[selected].medium}</p>
+                  <p className="capitalize">
+                    {filteredPaintings[selected].medium}
+                  </p>
                   <p>{filteredPaintings[selected].location}</p>
                   {filteredPaintings[selected].width &&
                     filteredPaintings[selected].height && (
