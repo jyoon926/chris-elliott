@@ -35,6 +35,7 @@
   -moz-osx-font-smoothing: grayscale;
 
   --background: 255, 255, 255;
+  --background-color: 197, 218, 235;
   --foreground: 0, 0, 0;
   --font-sans: "PP Neue Montreal";
   --font-serif: "PP Editorial New";
@@ -42,29 +43,36 @@
 
 html {
   color: rgb(var(--foreground));
-  background: rgb(var(--background));
   font-size: 14px;
+}
+
+.background {
+  background-image: url("/images/sky.jpg");
+  background-size: cover;
+  background-position: center;
+  opacity: 0.3;
+  filter: blur(1rem) saturate(1.5);
 }
 
 .header {
   background: linear-gradient(
     to bottom,
-    rgba(var(--background), 1) 0%,
-    rgba(var(--background), 0.987) 5.6%,
-    rgba(var(--background), 0.951) 11.7%,
-    rgba(var(--background), 0.896) 18.2%,
-    rgba(var(--background), 0.825) 24.9%,
-    rgba(var(--background), 0.741) 31.9%,
-    rgba(var(--background), 0.648) 39.1%,
-    rgba(var(--background), 0.55) 46.4%,
-    rgba(var(--background), 0.45) 53.6%,
-    rgba(var(--background), 0.352) 60.9%,
-    rgba(var(--background), 0.259) 68.1%,
-    rgba(var(--background), 0.175) 75.1%,
-    rgba(var(--background), 0.104) 81.8%,
-    rgba(var(--background), 0.049) 88.3%,
-    rgba(var(--background), 0.013) 94.4%,
-    rgba(var(--background), 0) 100%
+    rgba(var(--background-color), 1) 0%,
+    rgba(var(--background-color), 0.987) 5.6%,
+    rgba(var(--background-color), 0.951) 11.7%,
+    rgba(var(--background-color), 0.896) 18.2%,
+    rgba(var(--background-color), 0.825) 24.9%,
+    rgba(var(--background-color), 0.741) 31.9%,
+    rgba(var(--background-color), 0.648) 39.1%,
+    rgba(var(--background-color), 0.55) 46.4%,
+    rgba(var(--background-color), 0.45) 53.6%,
+    rgba(var(--background-color), 0.352) 60.9%,
+    rgba(var(--background-color), 0.259) 68.1%,
+    rgba(var(--background-color), 0.175) 75.1%,
+    rgba(var(--background-color), 0.104) 81.8%,
+    rgba(var(--background-color), 0.049) 88.3%,
+    rgba(var(--background-color), 0.013) 94.4%,
+    rgba(var(--background-color), 0) 100%
   );
 }
 

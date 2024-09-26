@@ -190,7 +190,7 @@ function Gallery() {
               >
                 <div className="flex flex-col justify-center items-center text-center">
                   <img
-                    className={"w-full duration-300 bg-gray-100"}
+                    className={"w-full duration-300 bg-gray-100 rounded"}
                     src={painting.photoM}
                     alt=""
                   />
@@ -273,7 +273,7 @@ function Gallery() {
                 </div>
                 <div className="w-full md:w-1/2 flex md:justify-center items-center">
                   <img
-                    className="max-w-full painting-main"
+                    className="max-w-full painting-main rounded-md"
                     key={filteredPaintings[selected].id}
                     src={filteredPaintings[selected].photoM}
                     alt=""

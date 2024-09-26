@@ -32,6 +32,7 @@ function App() {
           <Route path="" element={<Admin />} />
         </Route>
       </Routes>
+      <div className="background fixed top-0 left-0 h-screen w-screen z-[-1]"></div>
     </>
   );
 }

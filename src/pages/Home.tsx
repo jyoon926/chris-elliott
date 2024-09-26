@@ -39,7 +39,7 @@ function Home() {
   return (
     <div className="fade-in">
       <div className="px-3 sm:px-5">
-        <div className="pt-32 pb-20 flex flex-col items-center text-center">
+        <div className="pt-48 pb-32 flex flex-col items-center text-center">
           <h1 className="text-2xl sm:text-3xl font-serif">
             Discover the artistic world of
           </h1>
@@ -52,7 +52,7 @@ function Home() {
             the vibrant essence of urban landscapes, and the timeless elegance
             of still lifes and portraits.
           </p>
-          <Link to="/gallery/all" className="link mt-10">
+          <Link to="/gallery/all" className="button mt-10">
             View the gallery →
           </Link>
         </div>
@@ -66,10 +66,10 @@ function Home() {
                 key={collection.name}
               >
                 <p className="font-serif text-2xl pb-1">{collection.name}</p>
-                <div className="w-full h-60 lg:h-[500px] overflow-hidden">
+                <div className="w-full h-60 lg:h-[500px] overflow-hidden rounded-md">
                   {collection.photo && (
                     <div
-                      className="w-full h-full bg-cover bg-center scale-105 grayscale hover:grayscale-0 hover:scale-110 duration-700 bg-gray-100"
+                      className="w-full h-full bg-cover bg-center scale-105 hover:scale-110 duration-700 bg-gray-100"
                       style={{ backgroundImage: `url("${collection.photo}")` }}
                     ></div>
                   )}
