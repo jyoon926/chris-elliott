@@ -35,7 +35,7 @@
   -moz-osx-font-smoothing: grayscale;
 
   --background: 255, 255, 255;
-  --background-color: 197, 218, 235;
+  --background-color: 200, 217, 231;
   --foreground: 0, 0, 0;
   --font-sans: "PP Neue Montreal";
   --font-serif: "PP Editorial New";
@@ -51,7 +51,7 @@ html {
   background-size: cover;
   background-position: center;
   opacity: 0.3;
-  filter: blur(1rem) saturate(1.5);
+  filter: blur(1rem) saturate(1.2);
 }
 
 .header {
