@@ -178,7 +178,7 @@ function Gallery() {
         <div
           className="w-full grid gap-5 mt-5 mb-16"
           style={{
-            gridTemplateColumns: "repeat(auto-fill, minmax(250px, 1fr))",
+            gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))",
           }}
         >
           {filteredPaintings.map((painting, i) => (
