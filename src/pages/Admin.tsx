@@ -43,7 +43,7 @@ function Admin() {
       const uniqueCollections = Array.from(
         new Set(data.map((painting: Painting) => painting.collection))
       );
-      let collectionsArr: Collection[] = uniqueCollections.map(
+      const collectionsArr: Collection[] = uniqueCollections.map(
         (collectionName: string) => {
           const collectionPaintings = data.filter(
             (painting: Painting) => painting.collection === collectionName
@@ -96,7 +96,7 @@ function Admin() {
     }
   };
 
-  const handleChange = (id: number, key: keyof Painting, value: any): void => {
+  const handleChange = (id: number, key: keyof Painting, value: unknown): void => {
     setPaintings((prevPaintings) =>
       prevPaintings.map((painting) =>
         painting.id === id ? { ...painting, [key]: value } : painting

@@ -13,11 +13,11 @@ function About() {
         <h1 className="text-7xl sm:text-8xl font-serif mt-40 mb-20 text-center">
           About the Artist
         </h1>
-        <div className="flex flex-col md:flex-row gap-10 justify-center items-center sm:items-start mb-40">
+        <div className="flex flex-col lg:flex-row gap-10 justify-center items-center lg:items-start mb-40">
           <img
-            className="w-[200px] sm:w-[300px] bg-gray-100 rounded"
+            className="w-[200px] sm:w-[250px] bg-gray-100 shadow-md"
             src="images/chris-elliott.png"
-            alt=""
+            alt="Chris Elliott"
           />
           <div className="flex flex-col items-start text-lg gap-5 max-w-2xl">
             <p>

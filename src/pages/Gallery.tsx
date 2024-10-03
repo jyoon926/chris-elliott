@@ -9,6 +9,7 @@ import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
 function Gallery() {
   const { collection: urlCollection, id: urlPainting } = useParams();
   const navigate = useNavigate();
+  const [loading, setLoading] = useState<boolean>(true);
   const [paintings, setPaintings] = useState<Painting[]>([]);
   const [collections, setCollections] = useState<Collection[]>([]);
   const [selected, setSelected] = useState<number | undefined>();
@@ -18,7 +19,7 @@ function Gallery() {
       .trim()
       .toLowerCase()
       .replace(/\s+/g, "-")
-      .replace(/[^\w\-]+/g, "");
+      .replace(/[^\w]+/g, "");
   };
 
   const urlToString = (url: string): string => {
@@ -38,12 +39,13 @@ function Gallery() {
 
   useEffect(() => {
     const fetchData = async () => {
+      setLoading(true);
       const { data, error } = await supabase.from("paintings").select("*");
       if (error) {
         console.error("Error fetching data:", error);
       } else {
         data.sort((a, b) => a.order - b.order);
-        let uniqueCollections = Array.from(
+        const uniqueCollections = Array.from(
           new Set(data.map((painting) => painting.collection))
         );
         let collectionsArr: Collection[] = [
@@ -69,6 +71,7 @@ function Gallery() {
         setCollections(collectionsArr);
         preloadImages(data.map((painting) => painting.photoM));
       }
+      setLoading(false);
     };
 
     fetchData();
@@ -87,24 +90,24 @@ function Gallery() {
     } else {
       setSelected(undefined);
     }
-  }, [urlPainting, filteredPaintings]);
+  }, [urlPainting, filteredPaintings, urlCollection]);
 
-  const preloadImages = (imageUrls: any[]) => {
+  const preloadImages = (imageUrls: string[]) => {
     imageUrls.forEach((url) => {
       const img = new Image();
       img.src = url;
     });
   };
 
-  const handlePaintingClick = (index: number, painting: Painting) => {
+  const handlePaintingClick = useCallback((index: number, painting: Painting) => {
     setSelected(index);
     navigate(`/gallery/${urlCollection}/${stringToUrl(painting.title)}`);
-  };
+  }, [navigate, urlCollection]);
 
-  const handleClose = () => {
+  const handleClose = useCallback(() => {
     setSelected(undefined);
     navigate(`/gallery/${urlCollection}/`);
-  };
+  }, [navigate, urlCollection]);
 
   const handleKeyDown = useCallback(
     (event: KeyboardEvent) => {
@@ -132,7 +135,7 @@ function Gallery() {
         }
       }
     },
-    [selected, filteredPaintings]
+    [selected, filteredPaintings, handleClose, handlePaintingClick]
   );
 
   useEffect(() => {
@@ -157,73 +160,84 @@ function Gallery() {
       <div className="px-3 sm:px-5 mt-14">
         <h1 className="text-8xl sm:text-9xl font-serif mt-40 mb-16">Gallery</h1>
 
-        {/* Collections */}
-        <div className="flex flex-row flex-wrap border-b pb-3 gap-2">
-          {collections.map((collection) => (
-            <Link
-              key={collection.url}
-              to={`/gallery/${collection.url}`}
-              className={`border py-1.5 px-3.5 duration-300 rounded ${
-                urlCollection === collection.url
-                  ? "bg-foreground text-background"
-                  : "hover:bg-light"
-              }`}
-            >
-              {collection.name}
-            </Link>
-          ))}
-        </div>
-
-        {/* Paintings */}
-        <div
-          className="w-full grid gap-5 mt-5 mb-16"
-          style={{
-            gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))",
-          }}
-        >
-          {filteredPaintings.map((painting, i) => (
-            <div key={painting.id}>
-              <Link
-                to={`/gallery/${urlCollection}/${stringToUrl(painting.title)}`}
-                onClick={() => handlePaintingClick(i, painting)}
-                className="painting-card flex flex-col gap-3 mb-3"
-              >
-                <div className="flex flex-col justify-center items-center text-center">
-                  <img
-                    className={"w-full duration-300 bg-gray-100 rounded"}
-                    src={painting.photoM}
-                    alt=""
-                  />
-                  <div className="text opacity-0 absolute text-background duration-400 leading-5">
-                    {painting.price &&
-                      painting.display_price &&
-                      (painting.purchased ? (
-                        <p>${painting.price}</p>
-                      ) : (
-                        <p>
-                          <span className="line-through">
-                            ${painting.price}
-                          </span>{" "}
-                          <span className="opacity-60">Sold</span>
-                        </p>
-                      ))}
-                    <p>{painting.collection}</p>
-                    <p>{painting.location}</p>
-                    <p className="capitalize">{painting.medium}</p>
-                    {painting.width && painting.height && (
-                      <p>
-                        {painting.width} x {painting.height} in.
-                      </p>
-                    )}
-                  </div>
-                </div>
-                <p className="font-serif text-xl capitalize">
-                  {painting.title}
-                </p>
-              </Link>
+        {loading ?
+          <div className="w-full pb-10 flex justify-center">
+            <div className="animate-spin border border-t-black w-8 h-8 rounded-full"></div>
+          </div>
+        :
+          <>
+            {/* Collections */}
+            <div className="flex flex-row flex-wrap border-b pb-3 gap-2">
+              {collections.map((collection) => (
+                <Link
+                  key={collection.url}
+                  to={`/gallery/${collection.url}`}
+                  className={`border py-1.5 px-3.5 duration-300 rounded ${
+                    urlCollection === collection.url
+                      ? "bg-foreground text-background"
+                      : "hover:bg-light"
+                  }`}
+                >
+                  {collection.name}
+                </Link>
+              ))}
             </div>
-          ))}
-        </div>
+
+            {/* Paintings */}
+            <div
+              className="w-full grid gap-5 mt-5 mb-16"
+              style={{
+                gridTemplateColumns: "repeat(auto-fill, minmax(350px, 1fr))",
+              }}
+            >
+              {filteredPaintings.map((painting, i) => (
+                <div key={painting.id}>
+                  <Link
+                    to={`/gallery/${urlCollection}/${stringToUrl(painting.title)}`}
+                    onClick={() => handlePaintingClick(i, painting)}
+                    className="painting-card flex flex-col gap-3 mb-3"
+                  >
+                    <div className="flex flex-col justify-center items-center text-center">
+                      <div className="w-full h-96 p-8 bg-light border rounded flex justify-center items-center">
+                        <img
+                          className={"max-h-[20rem] max-w-full duration-300 shadow-md"}
+                          src={painting.photoM}
+                          alt=""
+                        />
+                      </div>
+                      <div className="text opacity-0 absolute text-background duration-400 leading-5">
+                        {painting.price &&
+                          painting.display_price &&
+                          (painting.purchased ? (
+                            <p>${painting.price}</p>
+                          ) : (
+                            <p>
+                              <span className="line-through">
+                                ${painting.price}
+                              </span>{" "}
+                              <span className="opacity-60">Sold</span>
+                            </p>
+                          ))}
+                        <p>{painting.collection}</p>
+                        <p>{painting.location}</p>
+                        <p className="capitalize">{painting.medium}</p>
+                        {painting.width && painting.height && (
+                          <p>
+                            {painting.width} x {painting.height} in.
+                          </p>
+                        )}
+                      </div>
+                    </div>
+                    <p className="font-serif text-xl capitalize">
+                      {painting.title}
+                    </p>
+                  </Link>
+                </div>
+              ))}
+            </div>
+          </>
+        }
+
       </div>
 
       {/* Slideshow */}
@@ -273,7 +287,7 @@ function Gallery() {
                 </div>
                 <div className="w-full md:w-1/2 flex md:justify-center items-center">
                   <img
-                    className="max-w-full painting-main rounded-md"
+                    className="max-w-full painting-main shadow-md"
                     key={filteredPaintings[selected].id}
                     src={filteredPaintings[selected].photoM}
                     alt=""

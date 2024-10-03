@@ -8,6 +8,7 @@ export default {
     extend: {
       colors: {
         background: 'rgb(var(--background))',
+        backgroundColor: 'rgb(var(--background-color))',
         foreground: 'rgb(var(--foreground))',
         light: 'rgba(var(--foreground), 0.075)',
       },

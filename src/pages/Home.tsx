@@ -40,37 +40,34 @@ function Home() {
     <div className="fade-in">
       <div className="px-3 sm:px-5">
         <div className="pt-48 pb-32 flex flex-col items-center text-center">
-          <h1 className="text-2xl sm:text-3xl font-serif">
+          <h1 className="text-2xl sm:text-3xl font-serif leading-none">
             Discover the artistic world of
           </h1>
-          <h1 className="text-7xl sm:text-8xl md:text-9xl font-serif italic mt-4">
-            Chris Elliott.
+          <h1 className="text-[14vw] md:text-[8rem] lg:text-[9rem] font-serif italic leading-none mt-7">
+            Chris Elliott
           </h1>
-          <p className="max-w-xl mt-5">
-            With a collection of over 300 stunning paintings and thousands of
-            sketches, Chris Elliott"s work captures the beauty of everyday life,
-            the vibrant essence of urban landscapes, and the timeless elegance
-            of still lifes and portraits.
+          <p className="max-w-xl mt-10">
+            With a collection of over 300 stunning paintings and sketches, Chris Elliott's work captures the beauty of everyday life, the vibrant essence of urban landscapes, and the timeless elegance of still lifes and portraits.
           </p>
-          <Link to="/gallery/all" className="button mt-10">
-            View the gallery →
+          <Link to="/gallery/all" className="button mt-12">
+            View the gallery
           </Link>
         </div>
         <div className="w-full">
-          <p className="border-b">Collections ↓</p>
-          <div className="flex flex-col lg:flex-row gap-5 py-5">
+          {/* <p className="border-b">Collections ↓</p> */}
+          <div className="border-t py-5 flex flex-col lg:flex-row gap-5">
             {collections.map((collection) => (
               <Link
                 className="w-full"
                 to={"/gallery/" + collection.url}
                 key={collection.name}
               >
-                <p className="font-serif text-2xl pb-1">{collection.name}</p>
-                <div className="w-full h-60 lg:h-[500px] overflow-hidden rounded-md">
+                <p className="font-serif text-2xl pb-2">{collection.name}</p>
+                <div className="w-full h-60 lg:h-[500px] rounded overflow-hidden">
                   {collection.photo && (
                     <div
-                      className="w-full h-full bg-cover bg-center scale-105 hover:scale-110 duration-700 bg-gray-100"
-                      style={{ backgroundImage: `url("${collection.photo}")` }}
+                    className="w-full h-full bg-cover bg-center scale-105 hover:scale-110 duration-700 bg-gray-100"
+                    style={{ backgroundImage: `url("${collection.photo}")` }}
                     ></div>
                   )}
                 </div>

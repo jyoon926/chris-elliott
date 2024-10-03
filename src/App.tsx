@@ -14,7 +14,7 @@ function App() {
   const { pathname } = useLocation();
 
   useEffect(() => {
-    if (!/^\/gallery\/[^\/]+\/[^\/]*$/.test(pathname)) window.scrollTo(0, 0);
+    if (!/^\/gallery\/[^/]+\/[^/]*$/.test(pathname)) window.scrollTo(0, 0);
   }, [pathname]);
 
   return (
