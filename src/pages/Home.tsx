@@ -54,8 +54,7 @@ function Home() {
           </Link>
         </div>
         <div className="w-full">
-          {/* <p className="border-b">Collections ↓</p> */}
-          <div className="border-t py-5 flex flex-col lg:flex-row gap-5">
+          <div className="bg-white mb-10 p-5 flex flex-col lg:flex-row gap-5">
             {collections.map((collection) => (
               <Link
                 className="w-full"

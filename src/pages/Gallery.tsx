@@ -170,7 +170,7 @@ function Gallery() {
             <div className="animate-spin border border-t-black w-8 h-8 rounded-full"></div>
           </div>
         ) : (
-          <div className="mx-5 mb-20">
+          <div className="mx-5 mb-10">
             {/* Collections */}
             <div className="flex flex-row flex-wrap mb-2 gap-2">
               {collections.map((collection) => (
@@ -200,7 +200,7 @@ function Gallery() {
                       painting.title
                     )}`}
                     onClick={() => handlePaintingClick(i, painting)}
-                    className="painting-card flex flex-col gap-4 mb-3"
+                    className="painting-card flex flex-col gap-4"
                   >
                     <div className="flex flex-col justify-center items-center text-center">
                       <img
