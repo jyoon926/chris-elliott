@@ -99,10 +99,13 @@ function Gallery() {
     });
   };
 
-  const handlePaintingClick = useCallback((index: number, painting: Painting) => {
-    setSelected(index);
-    navigate(`/gallery/${urlCollection}/${stringToUrl(painting.title)}`);
-  }, [navigate, urlCollection]);
+  const handlePaintingClick = useCallback(
+    (index: number, painting: Painting) => {
+      setSelected(index);
+      navigate(`/gallery/${urlCollection}/${stringToUrl(painting.title)}`);
+    },
+    [navigate, urlCollection]
+  );
 
   const handleClose = useCallback(() => {
     setSelected(undefined);
@@ -157,24 +160,26 @@ function Gallery() {
         !filteredPaintings.find(
           (p) => stringToUrl(p.title) === urlPainting
         ) && <Navigate replace to={`/gallery/${urlCollection}`} />}
-      <div className="px-3 sm:px-5 mt-14">
-        <h1 className="text-8xl sm:text-9xl font-serif mt-40 mb-16">Gallery</h1>
+      <div className="mt-14">
+        <h1 className="px-5 text-8xl sm:text-9xl font-serif mt-40 mb-16">
+          Gallery
+        </h1>
 
-        {loading ?
+        {loading ? (
           <div className="w-full pb-10 flex justify-center">
             <div className="animate-spin border border-t-black w-8 h-8 rounded-full"></div>
           </div>
-        :
-          <>
+        ) : (
+          <div className="mx-5 p-5 bg-white rounded-xl mb-20">
             {/* Collections */}
-            <div className="flex flex-row flex-wrap border-b pb-3 gap-2">
+            <div className="flex flex-row flex-wrap border-b pb-5 gap-2">
               {collections.map((collection) => (
                 <Link
                   key={collection.url}
                   to={`/gallery/${collection.url}`}
                   className={`border py-1.5 px-3.5 duration-300 rounded ${
                     urlCollection === collection.url
-                      ? "bg-foreground text-background"
+                      ? "bg-foreground text-white"
                       : "hover:bg-light"
                   }`}
                 >
@@ -185,27 +190,31 @@ function Gallery() {
 
             {/* Paintings */}
             <div
-              className="w-full grid gap-5 mt-5 mb-16"
+              className="w-full grid gap-5 mt-5"
               style={{
-                gridTemplateColumns: "repeat(auto-fill, minmax(350px, 1fr))",
+                gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))",
               }}
             >
               {filteredPaintings.map((painting, i) => (
                 <div key={painting.id}>
                   <Link
-                    to={`/gallery/${urlCollection}/${stringToUrl(painting.title)}`}
+                    to={`/gallery/${urlCollection}/${stringToUrl(
+                      painting.title
+                    )}`}
                     onClick={() => handlePaintingClick(i, painting)}
-                    className="painting-card flex flex-col gap-3 mb-3"
+                    className="painting-card flex flex-col gap-5 mb-3"
                   >
                     <div className="flex flex-col justify-center items-center text-center">
-                      <div className="w-full h-96 p-8 bg-light border rounded flex justify-center items-center">
+                      <div className="w-full sm:h-96 sm:p-8 sm:bg-light sm:border sm:rounded flex justify-center items-center">
                         <img
-                          className={"max-h-[20rem] max-w-full duration-300 shadow-md"}
+                          className={
+                            "w-full sm:w-auto sm:max-h-[20rem] sm:max-w-full duration-300 sm:shadow-md"
+                          }
                           src={painting.photoM}
                           alt=""
                         />
                       </div>
-                      <div className="text opacity-0 absolute text-background duration-400 leading-5">
+                      <div className="text opacity-0 absolute text-white duration-400 leading-5">
                         {painting.price &&
                           painting.display_price &&
                           (painting.purchased ? (
@@ -228,16 +237,15 @@ function Gallery() {
                         )}
                       </div>
                     </div>
-                    <p className="font-serif text-xl capitalize">
+                    <p className="font-serif text-2xl capitalize">
                       {painting.title}
                     </p>
                   </Link>
                 </div>
               ))}
             </div>
-          </>
-        }
-
+          </div>
+        )}
       </div>
 
       {/* Slideshow */}

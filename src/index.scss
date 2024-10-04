@@ -48,7 +48,11 @@ html {
 
 .background {
   background: rgb(var(--background-color));
-  background: linear-gradient(to top, rgb(var(--background-color)), rgb(var(--background)));
+  background: linear-gradient(
+    to top,
+    rgb(var(--background-color)),
+    rgb(var(--background))
+  );
 }
 
 .header {
