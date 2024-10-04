@@ -97,7 +97,7 @@ html {
   background: rgba(var(--foreground), 0.05);
   box-sizing: border-box;
   border-width: 1px;
-  border-radius: 0.25rem;
+  // border-radius: 0.25rem;
 
   &::placeholder {
     color: rgba(var(--foreground), 0.6);
@@ -110,11 +110,11 @@ html {
   font-size: 1rem;
   padding: 0.8rem 1.6rem;
   background: rgb(var(--foreground));
-  color: rgb(var(--background));
+  color: white;
   cursor: pointer;
   transition: 0.3s;
   backdrop-filter: blur(5px);
-  border-radius: 0.25rem;
+  // border-radius: 0.25rem;
 
   &:hover {
     background: rgba(var(--foreground), 0.8);

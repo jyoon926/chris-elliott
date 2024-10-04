@@ -63,7 +63,7 @@ function Home() {
                 key={collection.name}
               >
                 <p className="font-serif text-2xl pb-2">{collection.name}</p>
-                <div className="w-full h-60 lg:h-[500px] rounded overflow-hidden">
+                <div className="w-full h-60 lg:h-[500px] overflow-hidden">
                   {collection.photo && (
                     <div
                     className="w-full h-full bg-cover bg-center scale-105 hover:scale-110 duration-700 bg-gray-100"

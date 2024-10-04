@@ -170,17 +170,15 @@ function Gallery() {
             <div className="animate-spin border border-t-black w-8 h-8 rounded-full"></div>
           </div>
         ) : (
-          <div className="mx-5 p-5 bg-white rounded-xl mb-20">
+          <div className="mx-5 mb-20">
             {/* Collections */}
-            <div className="flex flex-row flex-wrap border-b pb-5 gap-2">
+            <div className="flex flex-row flex-wrap mb-2 gap-2">
               {collections.map((collection) => (
                 <Link
                   key={collection.url}
                   to={`/gallery/${collection.url}`}
-                  className={`border py-1.5 px-3.5 duration-300 rounded ${
-                    urlCollection === collection.url
-                      ? "bg-foreground text-white"
-                      : "hover:bg-light"
+                  className={`py-1.5 px-4 duration-300 bg-white text-foreground ${
+                    urlCollection !== collection.url && "opacity-50 hover:opacity-80"
                   }`}
                 >
                   {collection.name}
@@ -190,9 +188,9 @@ function Gallery() {
 
             {/* Paintings */}
             <div
-              className="w-full grid gap-5 mt-5"
+              className="w-full grid gap-5 p-5 sm:gap-10 sm:p-10 bg-white"
               style={{
-                gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))",
+                gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))",
               }}
             >
               {filteredPaintings.map((painting, i) => (
@@ -202,18 +200,16 @@ function Gallery() {
                       painting.title
                     )}`}
                     onClick={() => handlePaintingClick(i, painting)}
-                    className="painting-card flex flex-col gap-5 mb-3"
+                    className="painting-card flex flex-col gap-4 mb-3"
                   >
                     <div className="flex flex-col justify-center items-center text-center">
-                      <div className="w-full sm:h-96 sm:p-8 sm:bg-light sm:border sm:rounded flex justify-center items-center">
-                        <img
-                          className={
-                            "w-full sm:w-auto sm:max-h-[20rem] sm:max-w-full duration-300 sm:shadow-md"
-                          }
-                          src={painting.photoM}
-                          alt=""
-                        />
-                      </div>
+                      <img
+                        className={
+                          "w-full duration-300"
+                        }
+                        src={painting.photoM}
+                        alt=""
+                      />
                       <div className="text opacity-0 absolute text-white duration-400 leading-5">
                         {painting.price &&
                           painting.display_price &&
@@ -237,7 +233,7 @@ function Gallery() {
                         )}
                       </div>
                     </div>
-                    <p className="font-serif text-2xl capitalize">
+                    <p className="font-serif text-xl capitalize">
                       {painting.title}
                     </p>
                   </Link>
@@ -329,7 +325,7 @@ function Gallery() {
                 </button>
               </div>
             </div>
-            <button className="link fixed top-5 right-5" onClick={handleClose}>
+            <button className="link fixed top-5 left-5" onClick={handleClose}>
               Close
             </button>
           </>

@@ -10,7 +10,7 @@ export default {
         background: 'rgb(var(--background))',
         backgroundColor: 'rgb(var(--background-color))',
         foreground: 'rgb(var(--foreground))',
-        light: 'rgba(var(--foreground), 0.075)',
+        light: 'rgba(var(--foreground), 0.05)',
       },
       borderColor: {
         DEFAULT: 'rgba(var(--foreground), 0.1)'
