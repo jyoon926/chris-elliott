@@ -4,7 +4,10 @@ function Header() {
   return (
     <>
       <div className="header fixed top-0 left-0 w-full flex flex-row justify-between items-center px-5 h-14 z-40">
-        <div className="w-48 hidden md:flex flex-row gap-5 sm:gap-8">
+        <NavLink to="/" className="w-48 text-2xl font-serif mt-1">
+          Chris Elliott
+        </NavLink>
+        <div className="hidden md:flex flex-row gap-5 sm:gap-8">
           <NavLink
             to="/"
             className={({ isActive }) => `link ${isActive && "border-b border-black/30"}`}
@@ -24,9 +27,6 @@ function Header() {
             About
           </NavLink>
         </div>
-        <NavLink to="/" className="text-2xl font-serif mt-1">
-          Chris Elliott
-        </NavLink>
         <div className="w-48 hidden md:flex flex-row gap-5 justify-end sm:gap-8">
           <NavLink
             to="/contact"
@@ -37,7 +37,7 @@ function Header() {
             Contact
           </NavLink>
         </div>
-        <div className="w-48 flex md:hidden flex-row gap-5 sm:gap-8">
+        <div className="flex md:hidden flex-row gap-5 sm:gap-8">
           <NavLink
             to="/gallery/all"
             className={({ isActive }) => `link ${isActive && "border-b border-black/30"}`}
