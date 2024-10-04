@@ -12,7 +12,7 @@ const CollectionList: React.FC<CollectionListProps> = ({
   setCollection,
 }) => {
   return (
-    <div className="flex flex-row flex-wrap border-t py-5 gap-2">
+    <div className="flex flex-row flex-wrap pb-2 gap-2">
       <p
         onClick={() => setCollection(undefined)}
         className={`py-1.5 px-3.5 duration-300 cursor-pointer bg-white text-foreground ${
