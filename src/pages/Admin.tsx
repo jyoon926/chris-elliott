@@ -176,7 +176,7 @@ function Admin() {
         />
 
         {/* Paintings Table */}
-        <div className="dashboard w-full mb-32">
+        <div className="bg-white p-5 dashboard w-full mb-32">
           <DragDropContext onDragEnd={onDragEnd}>
             <Droppable droppableId="droppable">
               {(provided) => (
@@ -215,8 +215,8 @@ function Admin() {
                             className={`${
                               !snapshot.isDragging &&
                               selectedPaintings.includes(painting.id) &&
-                              "bg-blue-100"
-                            } ${snapshot.isDragging && "bg-green-100"}`}
+                              "bg-gray-100"
+                            } ${snapshot.isDragging && "bg-gray-100"}`}
                           >
                             <td
                               {...provided.dragHandleProps}
@@ -228,7 +228,7 @@ function Admin() {
                             </td>
                             <td>
                               <img
-                                className="h-12 rounded"
+                                className="h-12"
                                 src={painting.photoS}
                                 alt=""
                               />

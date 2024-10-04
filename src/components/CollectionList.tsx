@@ -15,10 +15,8 @@ const CollectionList: React.FC<CollectionListProps> = ({
     <div className="flex flex-row flex-wrap border-t py-5 gap-2">
       <p
         onClick={() => setCollection(undefined)}
-        className={`border py-1.5 px-3.5 duration-300 rounded cursor-pointer ${
-          selectedCollection
-            ? "hover:bg-light"
-            : "bg-foreground text-background"
+        className={`py-1.5 px-3.5 duration-300 cursor-pointer bg-white text-foreground ${
+          selectedCollection && "opacity-50 hover:opacity-80"
         }`}
       >
         All Paintings
@@ -27,10 +25,8 @@ const CollectionList: React.FC<CollectionListProps> = ({
         <p
           key={collection.url}
           onClick={() => setCollection(collection)}
-          className={`border py-1.5 px-3.5 duration-300 rounded cursor-pointer ${
-            selectedCollection?.url === collection.url
-              ? "bg-foreground text-background"
-              : "hover:bg-light"
+          className={`py-1.5 px-3.5 duration-300 cursor-pointer bg-white text-foreground ${
+            selectedCollection?.url !== collection.url && "opacity-50 hover:opacity-80"
           }`}
         >
           {collection.name}
