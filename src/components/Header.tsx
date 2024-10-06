@@ -31,7 +31,7 @@ function Header() {
           <NavLink
             to="/contact"
             className={({ isActive }) =>
-              `link border rounded px-4 py-1.5 ${isActive && "border-black/30"}`
+              `link border px-4 py-1.5 ${isActive && "border-black/30"}`
             }
           >
             Contact
