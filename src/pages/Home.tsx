@@ -11,25 +11,25 @@ function Home() {
     document.title = "Home | Chris Elliott Art Gallery";
 
     const fetchData = async () => {
-      const { data, error } = await supabase.from("paintings").select("*");
-      if (error) {
+      try {
+        const { data, error } = await supabase
+          .from("paintings")
+          .select("collection, order, photoM")
+          .order("order", { ascending: true });
+        if (error) throw error;
+        const collectionsMap = data.reduce((acc, painting) => {
+          if (!acc.has(painting.collection)) {
+            acc.set(painting.collection, {
+              name: painting.collection,
+              url: painting.collection.toLowerCase().replace(/\s+/g, "-"),
+              photo: painting.photoM || "",
+            });
+          }
+          return acc;
+        }, new Map());
+        setCollections(Array.from(collectionsMap.values()));
+      } catch (error) {
         console.error("Error fetching data:", error);
-      } else {
-        data.sort((a, b) => a.order - b.order);
-        const uniqueCollections = Array.from(
-          new Set(data.map((painting) => painting.collection))
-        );
-        const collectionsArr = uniqueCollections.map((collectionName) => {
-          const collectionPaintings = data.filter(
-            (painting) => painting.collection === collectionName
-          );
-          return {
-            name: collectionName,
-            url: collectionName.toLowerCase().replace(/\s+/g, "-"),
-            photo: collectionPaintings[0].photoM || "",
-          };
-        });
-        setCollections(collectionsArr);
       }
     };
 
@@ -47,7 +47,10 @@ function Home() {
             Chris Elliott
           </h1>
           <p className="max-w-xl mt-10">
-            With a collection of over 300 stunning paintings and sketches, Chris Elliott's work captures the beauty of everyday life, the vibrant essence of urban landscapes, and the timeless elegance of still lifes and portraits.
+            With a collection of over 300 stunning paintings and sketches, Chris
+            Elliott's work captures the beauty of everyday life, the vibrant
+            essence of urban landscapes, and the timeless elegance of still
+            lifes and portraits.
           </p>
           <Link to="/gallery/all" className="button mt-12">
             View the gallery
@@ -65,8 +68,8 @@ function Home() {
                 <div className="w-full h-60 lg:h-[500px] overflow-hidden">
                   {collection.photo && (
                     <div
-                    className="w-full h-full bg-cover bg-center scale-105 hover:scale-110 duration-700 bg-gray-100"
-                    style={{ backgroundImage: `url("${collection.photo}")` }}
+                      className="w-full h-full bg-cover bg-center scale-105 hover:scale-110 duration-700 bg-gray-100"
+                      style={{ backgroundImage: `url("${collection.photo}")` }}
                     ></div>
                   )}
                 </div>
