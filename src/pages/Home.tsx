@@ -56,27 +56,29 @@ function Home() {
             View the gallery
           </Link>
         </div>
-        <div className="w-full">
-          <div className="bg-white mb-10 p-5 flex flex-col lg:flex-row gap-5">
-            {collections.map((collection) => (
-              <Link
-                className="w-full"
-                to={"/gallery/" + collection.url}
-                key={collection.name}
-              >
-                <p className="font-serif text-2xl pb-2">{collection.name}</p>
-                <div className="w-full h-60 lg:h-[500px] overflow-hidden">
-                  {collection.photo && (
-                    <div
-                      className="w-full h-full bg-cover bg-center scale-105 hover:scale-110 duration-700 bg-gray-100"
-                      style={{ backgroundImage: `url("${collection.photo}")` }}
-                    ></div>
-                  )}
-                </div>
-              </Link>
-            ))}
+        {collections.length > 0 && (
+          <div className="w-full">
+            <div className="bg-white mb-10 p-5 flex flex-col lg:flex-row gap-5">
+              {collections.map((collection) => (
+                <Link
+                  className="w-full"
+                  to={"/gallery/" + collection.url}
+                  key={collection.name}
+                >
+                  <p className="font-serif text-2xl pb-2">{collection.name}</p>
+                  <div className="w-full h-60 lg:h-[500px] overflow-hidden">
+                    {collection.photo && (
+                      <div
+                        className="w-full h-full bg-cover bg-center scale-105 hover:scale-110 duration-700 bg-gray-100"
+                        style={{ backgroundImage: `url("${collection.photo}")` }}
+                      ></div>
+                    )}
+                  </div>
+                </Link>
+              ))}
+            </div>
           </div>
-        </div>
+        )}
       </div>
       <Footer></Footer>
     </div>

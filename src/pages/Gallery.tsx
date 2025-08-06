@@ -33,8 +33,8 @@ function Gallery() {
   const filteredPaintings =
     urlCollection !== "all"
       ? paintings.filter(
-          (painting) => stringToUrl(painting.collection) === urlCollection
-        )
+        (painting) => stringToUrl(painting.collection) === urlCollection
+      )
       : paintings;
 
   useEffect(() => {
@@ -148,7 +148,16 @@ function Gallery() {
     };
   }, [handleKeyDown]);
 
-  if (filteredPaintings.length === 0) return <></>;
+  if (filteredPaintings.length === 0) return <>
+    <div className="fade-in mt-14">
+      <h1 className="px-5 text-8xl sm:text-9xl font-serif mt-40 mb-16">
+        Gallery
+      </h1>
+      <p className="w-full px-5 opacity-50">
+        No paintings.
+      </p>
+    </div>
+  </>;
 
   return (
     <div className="fade-in">
@@ -177,9 +186,8 @@ function Gallery() {
                 <Link
                   key={collection.url}
                   to={`/gallery/${collection.url}`}
-                  className={`py-1.5 px-4 duration-300 bg-white text-foreground ${
-                    urlCollection !== collection.url && "opacity-50 hover:opacity-80"
-                  }`}
+                  className={`py-1.5 px-4 duration-300 bg-white text-foreground ${urlCollection !== collection.url && "opacity-50 hover:opacity-80"
+                    }`}
                 >
                   {collection.name}
                 </Link>
