@@ -59,24 +59,24 @@ const UploadPaintingForm: React.FC<UploadPaintingFormProps> = ({ onClose, refres
         const photoLFile = new File([await compress(file, 0.9, 2000) as Blob], "L-" + file.name, { type: file.type });
         const photoMFile = new File([await compress(file, 0.8, 1000) as Blob], "M-" + file.name, { type: file.type });
         const photoSFile = new File([await compress(file, 0.6, 500) as Blob], "S-" + file.name, { type: file.type });
-  
+
         const { data: dataL, error: uploadErrorL } = await supabase.storage.from('paintings').upload(photoLFile.name, photoLFile);
         const { data: dataM, error: uploadErrorM } = await supabase.storage.from('paintings').upload(photoMFile.name, photoMFile);
         const { data: dataS, error: uploadErrorS } = await supabase.storage.from('paintings').upload(photoSFile.name, photoSFile);
-  
+
         if (uploadErrorL || uploadErrorM || uploadErrorS) {
           setError('This painting already exists.');
           setUploading(false);
           return;
         }
-  
+
         const photoL = supabase.storage.from('paintings').getPublicUrl(dataL.path).data.publicUrl;
         const photoM = supabase.storage.from('paintings').getPublicUrl(dataM.path).data.publicUrl;
         const photoS = supabase.storage.from('paintings').getPublicUrl(dataS.path).data.publicUrl;
-  
+
         const { error } = await supabase
           .from('paintings')
-          .insert([{ title, collection, medium, width, height, year, location, price, purchased, photoS, photoM, photoL }]);
+          .insert({ title, collection, medium, width, height, year, location, price, purchased, photoS, photoM, photoL });
         if (error) {
           console.error('Error uploading painting:', error);
           setError(error.message);
@@ -155,7 +155,7 @@ const UploadPaintingForm: React.FC<UploadPaintingFormProps> = ({ onClose, refres
       <div className="flex flex-row justify-end items-center gap-5">
         <p className='text-red-500 text-sm'>{error}</p>
         <button type="submit" className="button">
-          {uploading 
+          {uploading
             ? <div className="spinner my-1"></div>
             : <span>Upload</span>
           }
