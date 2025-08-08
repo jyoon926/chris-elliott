@@ -7,8 +7,8 @@ import Contact from "./pages/Contact";
 import Header from "./components/Header";
 import { useEffect } from "react";
 import Login from "./pages/Login";
-import Admin from "./pages/Admin";
 import ProtectedRoute from "./components/ProtectedRoute";
+import AdminDashboard, { AdminPage } from "./pages/AdminDashboard";
 
 function App() {
   const { pathname } = useLocation();
@@ -29,7 +29,9 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/login" element={<Login />} />
         <Route path="/admin" element={<ProtectedRoute />}>
-          <Route path="" element={<Admin />} />
+          <Route path="" element={<AdminDashboard page={AdminPage.Paintings} />} />
+          <Route path="paintings" element={<AdminDashboard page={AdminPage.Paintings} />} />
+          <Route path="content" element={<AdminDashboard page={AdminPage.Content} />} />
         </Route>
       </Routes>
       <div className="background fixed top-0 left-0 h-screen w-screen z-[-1]"></div>

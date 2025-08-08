@@ -31,3 +31,10 @@ export const Collections = [
   "Interiors",
   "Unfinished",
 ];
+
+export interface Content {
+  id: number;
+  page: string;
+  name: string;
+  content: string;
+}

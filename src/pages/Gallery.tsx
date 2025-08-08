@@ -1,10 +1,11 @@
 import Footer from "../components/Footer";
 import { useCallback, useEffect, useState } from "react";
-import { supabase } from "../supabase";
 import { Collection, Painting } from "../types";
 import { useParams, useNavigate } from "react-router";
 import { Link, Navigate } from "react-router-dom";
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
+import { getCollectionsFromPaintings, getPaintings } from "../utils/database";
+import { preloadImages, stringToUrl, urlToString } from "../utils/utils";
 
 function Gallery() {
   const { collection: urlCollection, id: urlPainting } = useParams();
@@ -14,22 +15,6 @@ function Gallery() {
   const [collections, setCollections] = useState<Collection[]>([]);
   const [selected, setSelected] = useState<number | undefined>();
 
-  const stringToUrl = (str: string) => {
-    return str
-      .trim()
-      .toLowerCase()
-      .replace(/\s+/g, "-")
-      .replace(/[^\w]+/g, "");
-  };
-
-  const urlToString = (url: string): string => {
-    return url
-      .replace(/-/g, " ") // Replace hyphens with spaces
-      .toLowerCase() // Convert to lowercase
-      .replace(/(?:^|\s)\S/g, (a) => a.toUpperCase()) // Capitalize the first letter of each word
-      .replace(/[^a-zA-Z0-9\s]/g, ""); // Restore special characters if needed
-  };
-
   const filteredPaintings =
     urlCollection !== "all"
       ? paintings.filter(
@@ -37,50 +22,19 @@ function Gallery() {
       )
       : paintings;
 
+  // Fetch paintings and collections, and preload images
   useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      const { data, error } = await supabase.from("paintings").select("*");
-      if (error) {
-        console.error("Error fetching data:", error);
-      } else {
-        data.sort((a, b) => a.order - b.order);
-        const uniqueCollections = Array.from(
-          new Set(data.map((painting) => painting.collection))
-        );
-        let collectionsArr: Collection[] = [
-          {
-            name: "All Paintings",
-            url: "all",
-            photo: "",
-          },
-        ];
-        collectionsArr = collectionsArr.concat(
-          uniqueCollections.map((collectionName) => {
-            const collectionPaintings = data.filter(
-              (painting) => painting.collection === collectionName
-            );
-            return {
-              name: collectionName,
-              url: stringToUrl(collectionName),
-              photo: collectionPaintings[0]?.photoS || "",
-            };
-          })
-        );
-        setPaintings(data);
-        setCollections(collectionsArr);
-        preloadImages(data.map((painting) => painting.photoM));
-      }
+    setLoading(true);
+    getPaintings().then(p => {
+      setPaintings(p);
+      setCollections(getCollectionsFromPaintings(p));
+      preloadImages(p.map((painting) => painting.photoM));
       setLoading(false);
-    };
-
-    fetchData();
+    })
   }, []);
 
   useEffect(() => {
-    document.title = `Gallery - ${urlToString(
-      urlCollection!
-    )} | Chris Elliott Art Gallery`;
+    document.title = `Gallery - ${urlToString(urlCollection!)} | Chris Elliott Art Gallery`;
 
     if (urlPainting) {
       const selectedIndex = filteredPaintings.findIndex(
@@ -91,13 +45,6 @@ function Gallery() {
       setSelected(undefined);
     }
   }, [urlPainting, filteredPaintings, urlCollection]);
-
-  const preloadImages = (imageUrls: string[]) => {
-    imageUrls.forEach((url) => {
-      const img = new Image();
-      img.src = url;
-    });
-  };
 
   const handlePaintingClick = useCallback(
     (index: number, painting: Painting) => {

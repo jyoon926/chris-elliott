@@ -1,39 +1,17 @@
 import Footer from "../components/Footer";
 import { useEffect, useState } from "react";
-import { supabase } from "../supabase";
 import { Link } from "react-router-dom";
 import { Collection } from "../types";
+import { getCollections, getContent } from "../utils/database";
 
 function Home() {
   const [collections, setCollections] = useState<Collection[]>([]);
+  const [description, setDescription] = useState<string>("");
 
   useEffect(() => {
     document.title = "Home | Chris Elliott Art Gallery";
-
-    const fetchData = async () => {
-      try {
-        const { data, error } = await supabase
-          .from("paintings")
-          .select("collection, order, photoM")
-          .order("order", { ascending: true });
-        if (error) throw error;
-        const collectionsMap = data.reduce((acc, painting) => {
-          if (!acc.has(painting.collection)) {
-            acc.set(painting.collection, {
-              name: painting.collection,
-              url: painting.collection.toLowerCase().replace(/\s+/g, "-"),
-              photo: painting.photoM || "",
-            });
-          }
-          return acc;
-        }, new Map());
-        setCollections(Array.from(collectionsMap.values()));
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-
-    fetchData();
+    getCollections().then(setCollections);
+    getContent("home", "description").then(setDescription);
   }, []);
 
   return (
@@ -46,12 +24,7 @@ function Home() {
           <h1 className="text-[14vw] md:text-[8rem] lg:text-[9rem] font-serif italic leading-none mt-7">
             Chris Elliott
           </h1>
-          <p className="max-w-xl mt-10">
-            With a collection of over 300 stunning paintings and sketches, Chris
-            Elliott's work captures the beauty of everyday life, the vibrant
-            essence of urban landscapes, and the timeless elegance of still
-            lifes and portraits.
-          </p>
+          <p className="max-w-xl mt-10">{description}</p>
           <Link to="/gallery/all" className="button mt-12">
             View the gallery
           </Link>

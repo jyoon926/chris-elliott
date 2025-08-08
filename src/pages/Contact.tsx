@@ -1,10 +1,16 @@
 import { Link } from "react-router-dom";
 import Footer from "../components/Footer";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { getContent } from "../utils/database";
 
 function Contact() {
+  const [description, setDescription] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+
   useEffect(() => {
     document.title = "Contact | Chris Elliott Art Gallery";
+    getContent("contact", "description").then(setDescription);
+    getContent("contact", "email").then(setEmail);
   }, []);
 
   return (
@@ -14,11 +20,10 @@ function Contact() {
           Contact us
         </h1>
         <p className="sm:text-xl">
-          Curious about the art collection, or interested in purchasing a piece?
-          Send us a message!
+          {description}
         </p>
-        <Link className="button text-xl mb-12" to="mailto:example@gmail.com">
-          example&#64;gmail.com
+        <Link className="button text-xl mb-12" to={`mailto:${email}`}>
+          {email}
         </Link>
         <p className="sm:text-xl">Or, just fill out the form below &darr;</p>
         <form className="w-full">
