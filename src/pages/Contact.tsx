@@ -13,6 +13,11 @@ function Contact() {
     getContent("contact", "email").then(setEmail);
   }, []);
 
+  const handleSend = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    alert("Sending emails has not been set up yet.");
+  }
+
   return (
     <div className="fade-in">
       <div className="w-full px-3 sm:px-5 flex flex-col gap-5 items-start mb-40">
@@ -26,7 +31,7 @@ function Contact() {
           {email}
         </Link>
         <p className="sm:text-xl">Or, just fill out the form below &darr;</p>
-        <form className="w-full">
+        <form className="w-full" onSubmit={handleSend}>
           <div className="flex flex-col sm:flex-row gap-5 sm:text-xl">
             <div className="flex flex-col gap-5">
               <input
@@ -52,7 +57,7 @@ function Contact() {
                 placeholder="Message"
                 required
               />
-              <button className="button">Send</button>
+              <button className="button" type="submit">Send</button>
             </div>
           </div>
         </form>
