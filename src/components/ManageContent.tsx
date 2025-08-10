@@ -44,8 +44,8 @@ function ManageContent() {
         <tbody>
           {allContent.map((content) => (
             <tr key={content.id}>
-              <td>{capitalize(content.page)} Page</td>
-              <td>{capitalize(content.name)}</td>
+              <td className="align-top"><p className="py-2.5">{capitalize(content.page)} Page</p></td>
+              <td className="align-top"><p className="py-2.5">{capitalize(content.name)}</p></td>
               <td>
                 <AutoResizeTextarea
                   className="w-full bg-light p-2 leading-tight"
