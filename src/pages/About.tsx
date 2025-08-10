@@ -2,6 +2,7 @@ import Footer from "../components/Footer";
 import { useEffect, useState } from "react";
 import { getContent } from "../utils/database";
 import { formatBiography } from "../utils/utils";
+import Loader from "../components/Loader";
 
 function About() {
   const [bio, setBio] = useState<string>("");
@@ -12,7 +13,8 @@ function About() {
   }, []);
 
   return (
-    <div className="fade-in">
+    <>
+      <Loader loaded={bio !== ""} />
       <div className="px-3 sm:px-5 mt-14">
         <h1 className="text-7xl sm:text-8xl font-serif mt-40 mb-20 text-center">
           About the Artist
@@ -29,7 +31,7 @@ function About() {
         </div>
       </div>
       <Footer />
-    </div>
+    </>
   );
 }
 

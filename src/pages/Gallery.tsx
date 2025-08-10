@@ -6,11 +6,12 @@ import { Link, Navigate } from "react-router-dom";
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
 import { getCollectionsFromPaintings, getPaintings } from "../utils/database";
 import { preloadImages, stringToUrl, urlToString } from "../utils/utils";
+import Loader from "../components/Loader";
 
 function Gallery() {
   const { collection: urlCollection, id: urlPainting } = useParams();
   const navigate = useNavigate();
-  const [loading, setLoading] = useState<boolean>(true);
+  const [loaded, setLoaded] = useState<boolean>(false);
   const [paintings, setPaintings] = useState<Painting[]>([]);
   const [collections, setCollections] = useState<Collection[]>([]);
   const [selected, setSelected] = useState<number | undefined>();
@@ -24,12 +25,11 @@ function Gallery() {
 
   // Fetch paintings and collections, and preload images
   useEffect(() => {
-    setLoading(true);
     getPaintings().then(p => {
       setPaintings(p);
       setCollections(getCollectionsFromPaintings(p));
       preloadImages(p.map((painting) => painting.photoM));
-      setLoading(false);
+      setLoaded(true);
     })
   }, []);
 
@@ -95,19 +95,9 @@ function Gallery() {
     };
   }, [handleKeyDown]);
 
-  if (filteredPaintings.length === 0) return <>
-    <div className="fade-in mt-14">
-      <h1 className="px-5 text-8xl sm:text-9xl font-serif mt-40 mb-16">
-        Gallery
-      </h1>
-      <p className="w-full px-5 opacity-50">
-        No paintings.
-      </p>
-    </div>
-  </>;
-
   return (
-    <div className="fade-in">
+    <>
+      <Loader loaded={loaded} />
       {paintings.length && filteredPaintings.length === 0 && (
         <Navigate replace to="/gallery/all" />
       )}
@@ -120,11 +110,11 @@ function Gallery() {
         <h1 className="px-5 text-8xl sm:text-9xl font-serif mt-40 mb-16">
           Gallery
         </h1>
-
-        {loading ? (
-          <div className="w-full pb-10 flex justify-center">
-            <div className="animate-spin border border-t-black w-8 h-8 rounded-full"></div>
-          </div>
+        {filteredPaintings.length === 0 ? (
+          // No paintings
+          <p className="w-full px-5 opacity-50">
+            No paintings.
+          </p>
         ) : (
           <div className="mx-5 mb-10">
             {/* Collections */}
@@ -287,7 +277,7 @@ function Gallery() {
         )}
       </div>
       <Footer></Footer>
-    </div>
+    </>
   );
 }
 

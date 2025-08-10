@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Collection } from "../types";
 import { getCollections, getContent } from "../utils/database";
+import Loader from "../components/Loader";
 
 function Home() {
   const [collections, setCollections] = useState<Collection[]>([]);
@@ -15,7 +16,8 @@ function Home() {
   }, []);
 
   return (
-    <div className="fade-in">
+    <>
+      <Loader loaded={description !== "" && collections.length > 0} />
       <div className="px-3 sm:px-5">
         <div className="pt-48 pb-32 flex flex-col items-center text-center">
           <h1 className="text-2xl sm:text-3xl font-serif leading-none">
@@ -54,7 +56,7 @@ function Home() {
         )}
       </div>
       <Footer></Footer>
-    </div>
+    </>
   );
 }
 

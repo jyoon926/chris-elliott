@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import Footer from "../components/Footer";
 import { useEffect, useState } from "react";
 import { getContent } from "../utils/database";
+import Loader from "../components/Loader";
 
 function Contact() {
   const [description, setDescription] = useState<string>("");
@@ -19,7 +20,8 @@ function Contact() {
   }
 
   return (
-    <div className="fade-in">
+    <>
+      <Loader loaded={description !== "" && email !== ""} />
       <div className="w-full px-3 sm:px-5 flex flex-col gap-5 items-start mb-40">
         <h1 className="text-7xl sm:text-8xl sm:text-9xl font-serif mt-40 mb-10">
           Contact us
@@ -63,7 +65,7 @@ function Contact() {
         </form>
       </div>
       <Footer showContactLink={false}></Footer>
-    </div>
+    </>
   );
 }
 
