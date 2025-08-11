@@ -5,7 +5,7 @@ interface LoaderProps {
   loaded: boolean;
 }
 
-const BASE_DELAY = 700;
+const BASE_DELAY = 600;
 
 export default function Loader({ loaded }: LoaderProps) {
   const [delay, setDelay] = useState<number>(BASE_DELAY);
@@ -20,8 +20,8 @@ export default function Loader({ loaded }: LoaderProps) {
   }, [loaded]);
 
   return (
-    <div className={`duration-700 ${loaded && "opacity-0 pointer-events-none"} fixed inset-0 background z-[100] flex flex-col justify-center items-center p-10`} style={{ transitionDelay: delay + "ms" }}>
-      <div className="fade-in flex flex-col justify-center items-center gap-6">
+    <div className={`duration-1000 fixed inset-0 background z-[100] flex flex-col justify-center items-center p-10 ${loaded && "opacity-0 pointer-events-none"}`} style={{ transitionDelay: (delay + 600) + "ms" }}>
+      <div className={`flex flex-col justify-center items-center gap-6 opacity-1 duration-500 ${loaded && "opacity-0"}`} style={{ transitionDelay: delay + "ms" }}>
         <h1 className="text-2xl md:text-3xl lg:text-4xl font-serif italic">
           Chris Elliott Art Gallery
         </h1>

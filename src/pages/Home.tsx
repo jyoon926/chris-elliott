@@ -23,10 +23,10 @@ function Home() {
           <h1 className="text-2xl sm:text-3xl font-serif leading-none">
             Discover the artistic world of
           </h1>
-          <h1 className="text-[14vw] md:text-[8rem] lg:text-[9rem] font-serif italic leading-none mt-7">
+          <h1 className="text-[14vw] md:text-[7rem] lg:text-[8rem] font-serif italic leading-none mt-7">
             Chris Elliott
           </h1>
-          <p className="max-w-xl mt-10">{description}</p>
+          <p className="max-w-2xl mt-10">{description}</p>
           <Link to="/gallery/all" className="button mt-12">
             View the gallery
           </Link>
