@@ -32,34 +32,36 @@ function ManageContent() {
   }
 
   return (
-    <div className="w-full bg-white mt-5 mb-32 p-5 dashboard">
-      <table className="w-full text-left">
-        <thead>
-          <tr className="border-b">
-            <th className="shift">Page</th>
-            <th className="shift">Name</th>
-            <th className="shift">Content</th>
-          </tr>
-        </thead>
-        <tbody>
-          {allContent.map((content) => (
-            <tr key={content.id}>
-              <td className="align-top"><p className="py-2.5">{capitalize(content.page)} Page</p></td>
-              <td className="align-top"><p className="py-2.5">{capitalize(content.name)}</p></td>
-              <td>
-                <AutoResizeTextarea
-                  className="w-full bg-light p-2 leading-tight"
-                  value={content.content}
-                  onChange={(e) => handleChange(content.id, e.target.value)}
-                />
-              </td>
+    <div className="bg-white p-5 w-full mb-5 mt-5">
+      <div className="dashboard w-full">
+        <table className="w-full text-left">
+          <thead>
+            <tr className="border-b">
+              <th className="shift">Page</th>
+              <th className="shift">Name</th>
+              <th className="shift">Content</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
-      <div className="mt-5 flex flex-row gap-4 items-center">
-        <button className="button" onClick={handleSave}>Save changes</button>
-        <span className={saveResponse === "" ? "opacity-0" : "fade-out"}>{saveResponse}</span>
+          </thead>
+          <tbody>
+            {allContent.map((content) => (
+              <tr key={content.id}>
+                <td className="align-top"><p className="py-2.5">{capitalize(content.page)} Page</p></td>
+                <td className="align-top"><p className="py-2.5">{capitalize(content.name)}</p></td>
+                <td>
+                  <AutoResizeTextarea
+                    className="w-full bg-light p-2 leading-tight"
+                    value={content.content}
+                    onChange={(e) => handleChange(content.id, e.target.value)}
+                  />
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <div className="mt-5 flex flex-row gap-4 items-center">
+          <button className="button" onClick={handleSave}>Save changes</button>
+          <span className={saveResponse === "" ? "opacity-0" : "fade-out"}>{saveResponse}</span>
+        </div>
       </div>
     </div>
   );
