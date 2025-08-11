@@ -1,9 +1,18 @@
 .dashboard {
   overflow-x: auto;
+  max-height: calc(100vh - 200px);
 
   table {
     text-align: left;
     line-height: 1;
+
+    thead {
+      position: sticky;
+      top: 0;
+      z-index: 1;
+      background: white;
+      border-bottom-width: 1px;
+    }
 
     tr {
       border-bottom-width: 1px;
@@ -39,7 +48,6 @@
       th {
         padding: 8px 12px;
         font-weight: normal;
-        opacity: 0.5;
         text-wrap: nowrap;
       }
 

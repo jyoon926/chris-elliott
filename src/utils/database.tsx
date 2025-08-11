@@ -81,6 +81,12 @@ export const getCollectionsFromPaintings = (paintings: Painting[]): Collection[]
   return collections;
 }
 
+/**
+ * Gets content for a page and content name.
+ * @param page The page where the content is.
+ * @param name The name of the content.
+ * @returns A promise of the content string.
+ */
 export const getContent = async (page: string, name: string): Promise<string> => {
   const { data, error } = await supabase.from("content").select("content").eq("page", page).eq("name", name).single();
   if (error) {
@@ -91,6 +97,10 @@ export const getContent = async (page: string, name: string): Promise<string> =>
   }
 }
 
+/**
+ * Gets all website content from the database.
+ * @returns The website content.
+ */
 export const getAllContent = async (): Promise<Content[]> => {
   const { data, error } = await supabase.from("content").select("*");
   if (error) {
@@ -101,6 +111,11 @@ export const getAllContent = async (): Promise<Content[]> => {
   }
 }
 
+/**
+ * Uploads an array of contents to the database.
+ * @param contents The array of contents.
+ * @returns Promise of a string stating success or failure.
+ */
 export const saveContent = async (contents: Content[]): Promise<string> => {
   try {
     const { error } = await supabase

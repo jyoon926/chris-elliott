@@ -60,3 +60,10 @@ export function formatBiography(bio: string) {
     return <p key={i}>{para}</p>;
   });
 }
+
+export function toSentenceCase(str: string): string {
+  if (typeof str !== 'string' || str.length === 0) {
+    return "";
+  }
+  return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+}

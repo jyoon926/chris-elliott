@@ -5,7 +5,7 @@ import { useParams, useNavigate } from "react-router";
 import { Link, Navigate } from "react-router-dom";
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
 import { getCollectionsFromPaintings, getPaintings } from "../utils/database";
-import { preloadImages, stringToUrl, urlToString } from "../utils/utils";
+import { preloadImages, stringToUrl, toSentenceCase, urlToString } from "../utils/utils";
 import Loader from "../components/Loader";
 
 function Gallery() {
@@ -155,7 +155,7 @@ function Gallery() {
                         src={painting.photoM}
                         alt=""
                       />
-                      <div className="text opacity-0 absolute text-white duration-400 leading-5">
+                      <div className="text opacity-0 absolute text-white duration-400 leading-6">
                         {painting.price &&
                           painting.display_price &&
                           (painting.purchased ? (
@@ -170,7 +170,7 @@ function Gallery() {
                           ))}
                         <p>{painting.collection}</p>
                         <p>{painting.location}</p>
-                        <p className="capitalize">{painting.medium}</p>
+                        <p>{toSentenceCase(painting.medium!)}</p>
                         {painting.width && painting.height && (
                           <p>
                             {painting.width} x {painting.height} in.
@@ -222,8 +222,8 @@ function Gallery() {
                         <span className="opacity-60">Sold</span>
                       </p>
                     ))}
-                  <p className="capitalize">
-                    {filteredPaintings[selected].medium}
+                  <p>
+                    {toSentenceCase(filteredPaintings[selected].medium!)}
                   </p>
                   <p>{filteredPaintings[selected].location}</p>
                   {filteredPaintings[selected].width &&
