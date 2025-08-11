@@ -15,7 +15,7 @@ interface AdminDashboardProps {
 function AdminDashboard({ page }: AdminDashboardProps) {
   return (
     <div className="fade-in">
-      <div className="px-3 sm:px-5 mt-14">
+      <div className="px-5 mt-14">
         <h1 className="text-6xl sm:text-7xl font-serif mt-32 mb-5">
           Admin Dashboard
         </h1>

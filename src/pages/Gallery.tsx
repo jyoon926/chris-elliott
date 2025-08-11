@@ -192,14 +192,14 @@ function Gallery() {
       {/* Slideshow */}
       <div
         className={
-          "fixed inset-0 z-50 bg-white bg-opacity-75 backdrop-blur flex flex-col md:justify-center items-center gap-10 duration-500 " +
+          "fixed inset-0 z-50 bg-white bg-opacity-80 backdrop-blur-xl flex flex-col md:justify-center items-center gap-10 duration-500 " +
           (selected === undefined && "opacity-0 pointer-events-none")
         }
       >
         {selected !== undefined && (
           <>
             <div className="w-full flex flex-col justify-center items-center gap-10 md:gap-0">
-              <div className="w-full px-3 pt-12 md:py-20 flex flex-col md:flex-row gap-5 md:gap-8 justify-center items-center">
+              <div className="w-full px-5 pt-24 md:py-20 flex flex-col md:flex-row gap-5 md:gap-8 justify-center items-center">
                 <div className="w-full md:w-1/5">
                   <p className="opacity-50 mb-2">
                     {filteredPaintings[selected].collection}
@@ -236,16 +236,16 @@ function Gallery() {
                 </div>
                 <div className="w-full md:w-1/2 flex md:justify-center items-center">
                   <img
-                    className="max-w-full painting-main shadow-md"
+                    className="max-w-full painting-main shadow-lg"
                     key={filteredPaintings[selected].id}
                     src={filteredPaintings[selected].photoM}
                     alt=""
                   />
                 </div>
               </div>
-              <div className="w-full fixed bottom-3 md:bottom-auto flex justify-between items-center px-3 md:px-5">
+              <div className="w-full fixed bottom-3 md:bottom-auto flex justify-between items-center px-5 md:px-5">
                 <button
-                  className="text-2xl cursor-pointer"
+                  className="text-2xl cursor-pointer p-2"
                   onClick={() =>
                     handlePaintingClick(
                       selected - 1,
@@ -257,7 +257,7 @@ function Gallery() {
                   <AiOutlineArrowLeft />
                 </button>
                 <button
-                  className="text-2xl cursor-pointer"
+                  className="text-2xl cursor-pointer p-2"
                   onClick={() =>
                     handlePaintingClick(
                       selected + 1,

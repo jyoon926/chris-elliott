@@ -18,7 +18,7 @@ function Home() {
   return (
     <>
       <Loader loaded={description !== "" && collections.length > 0} />
-      <div className="px-3 sm:px-5">
+      <div className="px-5">
         <div className="pt-48 pb-32 flex flex-col items-center text-center">
           <h1 className="text-2xl sm:text-3xl font-serif leading-none">
             Discover the artistic world of

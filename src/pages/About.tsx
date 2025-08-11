@@ -15,7 +15,7 @@ function About() {
   return (
     <>
       <Loader loaded={bio !== ""} />
-      <div className="px-3 sm:px-5 mt-14">
+      <div className="px-5 mt-14">
         <h1 className="text-7xl sm:text-8xl font-serif mt-40 mb-20 text-center">
           About the Artist
         </h1>
